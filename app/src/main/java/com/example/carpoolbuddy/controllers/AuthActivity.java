@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,9 +25,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.UUID;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -57,13 +59,20 @@ public class AuthActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //access texts from text fields
-        emailField = findViewById(R.id.email);
-        passwordField = findViewById(R.id.password);
+        emailField = findViewById(R.id.owner);
+        passwordField = findViewById(R.id.model);
     }
     public void SignIn(View w){
         System.out.println("sign in");
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
+
+        //check validity
+        if(passwordString.equals("")  || emailString.equals("")){
+            Toast.makeText(AuthActivity.this, "Sign in failed. Please check your email is valid and password length is at least 6.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         mAuth.signInWithEmailAndPassword(emailString, passwordString)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -89,6 +98,13 @@ public class AuthActivity extends AppCompatActivity {
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
 
+        //check validity
+        if(passwordString.equals("")  || emailString.equals("")){
+            Toast.makeText(AuthActivity.this, "Sign in failed. Please check your email is valid and password length is at least 6.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //google create the user
         mAuth.createUserWithEmailAndPassword(emailString,passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -96,12 +112,12 @@ public class AuthActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Log.d("SIGN UP","sign up succeeded");
                     FirebaseUser user = mAuth.getCurrentUser();
+                    updateFirebase(emailString, passwordString);
                     updateUI(user);
                 }else{
                     Log.w("SIGN UP", "createUserWithEmail:failure", task.getException());
                     Toast.makeText(AuthActivity.this, "Sign up failed. Please make sure that gmail is valid and password length is at least 6 chars", Toast.LENGTH_SHORT).show();
                     updateUI(null);
-
                 }
             }
         });
@@ -158,5 +174,9 @@ public class AuthActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+    }
+    private void updateFirebase(String email, String password){
+        User user = new User(UUID.randomUUID().toString(), email, password);
+        firestore.collection("users").document(user.getUid()).set(user);
     }
 }

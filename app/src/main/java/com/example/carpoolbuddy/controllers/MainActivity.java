@@ -23,6 +23,16 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    public void userProfile(View w){
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void AddVehicle(View v){
+        Intent intent = new Intent(this, AddVehicleActivity.class);
+        startActivity(intent);
+    }
+
     public void SignOut(View w){
         mAuth.signOut();
         System.out.println("loging out!");

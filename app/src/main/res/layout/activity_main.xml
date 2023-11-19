@@ -2,25 +2,111 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#333b6a"
-    android:onClick="SignOut"
+    android:onClick="userProfile"
     android:orientation="vertical"
     tools:context=".controllers.MainActivity">
 
-    <Button
-        android:id="@+id/logout"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="16dp"
+        android:onClick="userProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_icon" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="61dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="596dp"
+        android:onClick="AddVehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_icon" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#8DE3CA"
-        android:onClick="SignOut"
-        android:text="Logout"
-        android:textColor="#333b6a"
-        android:textSize="16sp"
+        android:layout_marginTop="140dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Available Rides"
+        android:textColor="#AAF8C9"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.412"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="26dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/white"
+            android:showDividers="middle"
+            android:stretchColumns="*">
+
+            <!-- Header row -->
+            <TableRow>
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Name"
+                    android:textAppearance="@android:style/TextAppearance.Large"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Available Seats"
+                    android:textAppearance="@android:style/TextAppearance.Large"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <!-- Data rows -->
+            <TableRow>
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Cici"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="4 people"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <!-- Add more data rows as needed -->
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="42dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="76dp"
+        android:onClick="reload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reload_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

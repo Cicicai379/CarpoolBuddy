@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333b6a"
+    android:onClick="SelectImage"
+    android:orientation="vertical"
+    tools:context=".controllers.AddVehicleActivity">
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Available Rides"
+        android:textColor="#E6E8E7"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:hint="Owner"
+        android:inputType="textEmailAddress"
+        android:textColor="#E8E4E4"
+        android:textColorHint="#BCBABA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="368dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:hint="Contact"
+        android:inputType="text"
+        android:textColor="#E8E4E4"
+        android:textColorHint="#BCBABA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="120dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="488dp"
+        android:backgroundTint="#8DE3CA"
+        android:onClick="addNewVehicle"
+        android:text="Upload"
+        android:textColor="#333b6a"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/capcity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="316dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:hint="Capacity"
+        android:inputType="number"
+        android:textColor="#E8E4E4"
+        android:textColorHint="#BCBABA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="424dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Select Image"
+        android:textColor="#D2F4AA"
+        android:textColorHighlight="#D2F4AA"
+        android:textColorHint="#D2F4AA"
+        android:textColorLink="#D2F4AA"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:hint="Car Model"
+        android:inputType="textEmailAddress"
+        android:textColor="#E8E4E4"
+        android:textColorHint="#BCBABA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:onClick="MainActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/return_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
