@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CarpoolBUddy"
         tools:targetApi="31">
         <activity
+            android:name=".controllers.AppInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".controllers.VehicleProfileActivity"
             android:exported="false" />
         <activity

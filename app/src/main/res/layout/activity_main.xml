@@ -15,7 +15,7 @@
         android:layout_width="46dp"
         android:layout_height="48dp"
         android:layout_marginStart="348dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:onClick="userProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,6 +70,7 @@
                     android:textColor="#FFFFFF" />
 
                 <TextView
+                    android:onClick="VehicleProfile"
                     android:padding="8dp"
                     android:text="Available Seats"
                     android:textAppearance="@android:style/TextAppearance.Large"
@@ -108,5 +109,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/reload_icon" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="44dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="291dp"
+        android:layout_marginTop="24dp"
+        android:onClick="AppInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddVehicleActivity.class);
         startActivity(intent);
     }
+    public void VehicleProfile(View v){
+        Intent intent = new Intent(this, VehicleProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void AppInfo(View v){
+        System.out.println("app info!");
+        Intent intent = new Intent(this, AppInfoActivity.class);
+        startActivity(intent);
+    }
+
 
     public void SignOut(View w){
         mAuth.signOut();

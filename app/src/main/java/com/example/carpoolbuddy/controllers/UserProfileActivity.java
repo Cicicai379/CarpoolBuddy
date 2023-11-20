@@ -3,9 +3,11 @@ package com.example.carpoolbuddy.controllers;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.carpoolbuddy.R;
 import com.example.carpoolbuddy.models.User;
@@ -53,7 +55,15 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    //set user info
+    @SuppressLint("SetTextI18n")
     private void getUser(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        System.out.println("email: " + user.getEmail());
 
+        // get user info, set in the textview
+        TextView myAwesomeTextView = (TextView)findViewById(R.id.user_info);
+        myAwesomeTextView.setText("User Id: " + user.getUid() +
+                "\n\nEmail: " + user.getEmail());
     }
 }
