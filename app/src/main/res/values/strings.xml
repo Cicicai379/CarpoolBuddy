@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">CarpoolBUddy</string>
     <string name="default_web_client_id">922095791232-a3ls0ti7lspcm8eji43fqktf1in0ro2q.apps.googleusercontent.com</string>
+    <string-array name="vehicle_types">
+        <item>Car</item>
+        <item>Segway</item>
+        <item>Helicopter</item>
+        <item>Bike</item>
+    </string-array>
+
+    <string-array name="user_types">
+        <item>Student</item>
+        <item>Teacher</item>
+        <item>Parent</item>
+    </string-array>
+
 </resources>

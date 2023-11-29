@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="207dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="150dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="Sign Up"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_username"
+        android:layout_width="323dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="220dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:hint="Username"
+        android:inputType="text"
+        android:textColor="#E8E4E4"
+        android:textColorHint="#BCBABA"
+        app:boxCornerRadiusBottomEnd="5dp"
+        app:boxCornerRadiusBottomStart="5dp"
+
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/signup2"
+        android:layout_width="325dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:onClick="SignUp"
+        android:padding="8dp"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#4ecca3"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#4ecca3"
+        app:strokeWidth="4dp" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="89dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="588dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="186dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="732dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Already have an account?"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="131dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="572dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Sign up with "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="408dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="I am a student"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="89dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="588dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="83dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="144dp"
+        android:onClick="firebaseAuthWithGoogle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/googleg_standard_color_18" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="84dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="732dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Login"
+        android:textColor="@color/t"
+        android:textColorHint="@color/t"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_password"
+        android:layout_width="325dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="348dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#EDE6E6"
+        android:textColorHint="#BCBABA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_email"
+        android:layout_width="323dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="284dp"
+        android:backgroundTint="#FAF5F5"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#E8E4E4"
+
+        android:textColorHint="#BCBABA"
+        app:boxCornerRadiusBottomEnd="5dp"
+        app:boxCornerRadiusBottomStart="5dp"
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="762dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/back" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

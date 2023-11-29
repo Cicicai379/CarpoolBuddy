@@ -40,11 +40,13 @@ public class UserProfileActivity extends AppCompatActivity {
         mAuth.signOut();
         Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void MainActivity(View w){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
