@@ -61,7 +61,7 @@
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
     <TextView
-        android:id="@+id/signup_password"
+        android:id="@+id/edit_password"
         android:layout_width="239dp"
         android:layout_height="20dp"
         android:layout_marginStart="96dp"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/signup_email"
+        android:id="@+id/edit_email"
         android:layout_width="238dp"
         android:layout_height="20dp"
         android:layout_marginStart="96dp"

@@ -44,8 +44,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         //get all input data
-        ownerField = findViewById(R.id.signup_email);
-        carModelField = findViewById(R.id.signup_password);
+        ownerField = findViewById(R.id.edit_email);
+        carModelField = findViewById(R.id.edit_password);
         capacityField = findViewById(R.id.profile_capacity);
         contactField = findViewById(R.id.profile_contact);
         priceField = findViewById(R.id.profile_price);

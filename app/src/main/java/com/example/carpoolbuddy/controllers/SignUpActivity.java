@@ -1,81 +1,89 @@
 package com.example.carpoolbuddy.controllers;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.carpoolbuddy.R;
-import com.example.carpoolbuddy.models.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.UUID;
 
 public class SignUpActivity extends AppCompatActivity {
 
         private FirebaseAuth mAuth;
         private FirebaseFirestore firestore;
         private EditText emailField;
-        private EditText passwordField;
 
-        private GoogleSignInClient mGoogleSignInClient;
+        private EditText passwordField;
+        private EditText usernameField;
+
+        GoogleSignInClient mGoogleSignInClient;
         private ProgressDialog progressDialog;
         private int RC_SIGN_IN = 40;
         private Spinner addTypeSpinner;
 
+        @SuppressLint("MissingInflatedId")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             System.out.println("signup---");
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_signup);
 
-            firestore = FirebaseFirestore.getInstance();
             mAuth = FirebaseAuth.getInstance();
+            firestore = FirebaseFirestore.getInstance();
+            emailField = findViewById(R.id.edit_email);
+            passwordField = findViewById(R.id.edit_password);
+            usernameField = findViewById(R.id.signup_username);
 
+            progressDialog = new ProgressDialog(SignUpActivity.this);
+            progressDialog.setTitle("Google account");
+            progressDialog.setMessage("creating account");
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail().build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         }
 
         public void SignUp2(View w){
+            CheckBox userTypeCheckbox = (CheckBox)findViewById(R.id.user_type);
+            boolean isChecked = userTypeCheckbox.isChecked();
+            String t;
+            if (isChecked) {
+                t = "S";
+            } else {
+                t = "T/P";
+            }
             System.out.println("sign up");
             String emailString = emailField.getText().toString();
             String passwordString = passwordField.getText().toString();
+            String usernameString = usernameField.getText().toString();
 
             //check validity
-            if(passwordString.equals("")  || emailString.equals("")){
-                Toast.makeText(com.example.carpoolbuddy.controllers.SignUpActivity.this, "Sign in failed. Please check your email is valid and password length is at least 6.",
+            if(usernameString.equals("")  || passwordString.equals("")  || emailString.equals("")){
+                Toast.makeText(com.example.carpoolbuddy.controllers.SignUpActivity.this, "Sign in failed. Please check your username and email are valid and password length is at least 6.",
                         Toast.LENGTH_SHORT).show();
                 return;
             }
+            Intent intent = new Intent(this, LoadingActivity.class);
+            intent.putExtra("email", emailString);
+            intent.putExtra("password", passwordString);
+            intent.putExtra("username", usernameString);
+            intent.putExtra("user_type", t);
+            intent.putExtra("type", "signup");
+            startActivity(intent);
 
-            //google create the user
-            mAuth.createUserWithEmailAndPassword(emailString,passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()){
-                        Log.d("SIGN UP","sign up succeeded");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateFirebase(emailString, passwordString);
-                        updateUI(user);
-                    }else{
-                        Log.w("SIGN UP", "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(com.example.carpoolbuddy.controllers.SignUpActivity.this, "Sign up failed. Please make sure that gmail is valid and password length is at least 6 chars", Toast.LENGTH_SHORT).show();
-                        updateUI(null);
-                    }
-                }
-            });
         }
         public void updateUI(FirebaseUser currentUser){
             if(currentUser != null){
@@ -83,9 +91,23 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-        private void updateFirebase(String email, String password){
-            User user = new User(UUID.randomUUID().toString(), email, password);
-            firestore.collection("users").document(user.getUid()).set(user);
-        }
+
+
+    public void Return(View w){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+    }
+
+    public void SignInWithGoogleSU(View w) {
+        Intent intent = new Intent(this, LoadingActivity.class);
+        intent.putExtra("type", "signup_google");
+        startActivity(intent);
+    }
+
+    public void ToSignIn(View w){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
 }

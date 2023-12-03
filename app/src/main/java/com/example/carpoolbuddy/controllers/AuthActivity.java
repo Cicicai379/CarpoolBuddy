@@ -60,9 +60,6 @@ public class AuthActivity extends AppCompatActivity {
                     .requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        //access texts from text fields
-        emailField = findViewById(R.id.signup_email);
-        passwordField = findViewById(R.id.signup_password);
     }
     public void SignIn(View w){
         Intent intent = new Intent(this, LoginActivity.class);
@@ -80,7 +77,6 @@ public class AuthActivity extends AppCompatActivity {
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent,RC_SIGN_IN);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,6 +127,7 @@ public class AuthActivity extends AppCompatActivity {
         User user = new User(UUID.randomUUID().toString(), email, password);
         firestore.collection("users").document(user.getUid()).set(user);
     }
+
 
 
 }

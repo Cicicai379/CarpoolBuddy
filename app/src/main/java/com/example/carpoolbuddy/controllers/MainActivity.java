@@ -2,6 +2,9 @@ package com.example.carpoolbuddy.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -15,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.fragments.ExploreFragment;
+import com.example.carpoolbuddy.controllers.fragments.HomeFragment;
+import com.example.carpoolbuddy.controllers.fragments.ProfileFragment;
+import com.example.carpoolbuddy.controllers.fragments.RidesFragment;
+import com.example.carpoolbuddy.databinding.ActivityMainBinding;
 import com.example.carpoolbuddy.models.Vehicle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
+    ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +47,36 @@ public class MainActivity extends AppCompatActivity {
         //Set up firebase auth and firestore instances
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        getDataAndDisplay();
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
+        binding.bottomNavigationView.setOnItemSelectedListener(item ->{
+            switch (item.getItemId()){
+                case R.id.home:
+                    replaceFragment(new HomeFragment());
+                    break;
+                case R.id.profile:
+                    replaceFragment(new ProfileFragment());
+                    break;
+                case R.id.rides:
+                    replaceFragment(new RidesFragment());
+                    break;
+                case R.id.explore:
+                    replaceFragment(new ExploreFragment());
+                    break;
+            }
+            return true;
+        });
+    }
+
+
+    private void replaceFragment(Fragment fragment){
+        System.out.println(fragment.getClass().toString());
+        FragmentManager fragmentManager =  getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -65,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //display data
                 System.out.println("Displaying data, data size: "+vehicleList.size());
-                TableLayout tableLayout = findViewById(R.id.tableLayout);
+                TableLayout tableLayout = findViewById(R.id.user_button);
                 deleteAllRowsExceptHeader(tableLayout);
                 for (final Vehicle vehicle : vehicleList) {
                     // Create a new row
@@ -125,13 +164,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void reload(View v)
     {
-        TableLayout tableLayout = findViewById(R.id.tableLayout);
+        TableLayout tableLayout = findViewById(R.id.user_button);
         getDataAndDisplay();
     }
-    public void userProfile(View w){
-        Intent intent = new Intent(this, UserProfileActivity.class);
-        startActivity(intent);
-    }
+
     public void AddVehicle(View v){
         Intent intent = new Intent(this, AddVehicleActivity.class);
         startActivity(intent);
@@ -145,12 +181,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AppInfoActivity.class);
         startActivity(intent);
     }
-    public void SignOut(View w){
-        mAuth.signOut();
-        System.out.println("loging out!");
-        Intent intent = new Intent(this, AuthActivity.class);
-        startActivity(intent);
-    }
+
 
     private void deleteAllRowsExceptHeader(TableLayout tableLayout) {
         int childCount = tableLayout.getChildCount();
@@ -161,5 +192,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("fragmentToLoad")) {
+            String fragmentToLoad = intent.getStringExtra("fragmentToLoad");
+            if (fragmentToLoad.equals("profile")) {
+                // Load the profile fragment
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_layout, new ProfileFragment())
+                        .commit();
+            }
+        }
+    }
 
 }

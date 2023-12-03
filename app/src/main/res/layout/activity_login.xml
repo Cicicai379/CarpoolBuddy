@@ -13,7 +13,7 @@
         android:layout_width="140dp"
         android:layout_height="88dp"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="150dp"
         android:fontFamily="@font/montserrat_extrabold"
         android:text="Login"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/signup_email"
+        android:id="@+id/edit_email"
         android:layout_width="323dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
@@ -33,20 +33,20 @@
         android:fontFamily="@font/montserrat_medium"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColor="#E8E4E4"
+        android:textColor="#000000"
         android:textColorHint="#BCBABA"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/signup_password"
+        app:layout_constraintBottom_toTopOf="@+id/edit_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
         />
 
     <EditText
-        android:id="@+id/signup_password"
+        android:id="@+id/edit_password"
         android:layout_width="321dp"
         android:layout_height="51dp"
         android:layout_marginBottom="492dp"
@@ -55,7 +55,7 @@
         android:fontFamily="@font/montserrat_medium"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColor="#EDE6E6"
+        android:textColor="#000000"
         android:textColorHint="#BCBABA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="164dp"
         android:layout_marginBottom="196dp"
-        android:onClick="firebaseAuthWithGoogle"
+        android:onClick="SignInWithGoogle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/googleg_standard_color_18" />
@@ -95,7 +95,7 @@
         app:strokeWidth="4dp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/remember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -112,6 +112,7 @@
         android:layout_marginTop="378dp"
         android:layout_marginEnd="45dp"
         android:fontFamily="@font/montserrat_medium"
+        android:onClick="ForgotPassword"
         android:text="Forgot Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -150,6 +151,7 @@
         android:layout_marginTop="687dp"
         android:layout_marginEnd="68dp"
         android:fontFamily="@font/montserrat_bold"
+        android:onClick="ToSignUp"
         android:text="Sign Up"
         android:textColor="@color/t"
         android:textColorHint="@color/t"
@@ -185,10 +187,12 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="38dp"
         android:layout_marginBottom="762dp"
+        android:onClick="Return"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/back" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

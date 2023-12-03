@@ -5,121 +5,37 @@
     android:id="@+id/user_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333b6a"
-    android:onClick="userProfile"
     android:orientation="vertical"
     tools:context=".controllers.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="46dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="348dp"
-        android:layout_marginTop="24dp"
-        android:onClick="userProfile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user_icon" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="61dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="596dp"
-        android:onClick="AddVehicle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add_icon" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Available Rides"
-        android:textColor="#AAF8C9"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.412"
+    <RelativeLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="416dp"
+        android:layout_height="775dp"
+        android:layout_marginBottom="71dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginBottom="160dp">
 
-        <!-- Header row -->
-        <TableRow
-            android:id="@+id/headerRow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="Name"
-                android:textAppearance="@android:style/TextAppearance.Large"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Available Seats"
-                android:textAppearance="@android:style/TextAppearance.Large"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/headerRow"
-            android:layout_marginTop="8dp">
-
-            <TableLayout
-                android:id="@+id/tableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@android:color/white"
-                android:showDividers="middle">
-
-                <!-- Table rows -->
-
-            </TableLayout>
-        </ScrollView>
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="42dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="76dp"
-        android:onClick="reload"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/reload_icon" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="44dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="291dp"
-        android:layout_marginTop="24dp"
-        android:onClick="AppInfo"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="409dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="1dp"
+        app:itemActiveIndicatorStyle="@color/t"
+        app:itemBackground="@color/t"
+        app:itemIconTint="@color/white"
+        app:itemRippleColor="@color/t"
+        app:itemTextAppearanceActive="@color/white"
+        app:itemTextAppearanceInactive="@color/white"
+        app:itemTextColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
+        app:menu="@menu/bottom_nav_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

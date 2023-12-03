@@ -7,12 +7,31 @@ public class User {
     private String name;
     private String email;
     private String userType;
+
+    private String phone;
     private double priceMultiplier;
     private ArrayList<String> ownedVehicles;
 
-    public User(String uid, String email, String password){
-        this.email = email;
+    public User(){
+
+    }
+
+    public User(String uid, String email, String username){
         this.uid = uid;
+        this.email = email;
+        this.name = username;
+    }
+    public User(String uid, String email, String username, String type){
+        this.uid = uid;
+        this.email = email;
+        this.name = username;
+        this.userType = type;
+    }
+
+    public User(int a, String email, String username, String phone){
+        this.email = email;
+        this.name = username;
+        this.phone = phone;
     }
     public String getUid() {
         return uid;
@@ -60,5 +79,13 @@ public class User {
 
     public void setOwnedVehicles(ArrayList<String> ownedVehicles) {
         this.ownedVehicles = ownedVehicles;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
