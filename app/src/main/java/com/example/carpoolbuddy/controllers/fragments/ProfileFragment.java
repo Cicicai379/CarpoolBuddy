@@ -101,66 +101,74 @@ public class ProfileFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void getUserData(View view) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        String userId = user.getUid();
+        if (isAdded() && requireContext() != null) {
+            FirebaseUser user = mAuth.getCurrentUser();
+            String userId = user.getUid();
 
-        TextView nameTextView = view.findViewById(R.id.name);
-        TextView emailTextView = view.findViewById(R.id.email);
-        TextView phoneTextView = view.findViewById(R.id.phone);
-        ImageView profileImageView = view.findViewById(R.id.circleImageView);
+            TextView nameTextView = view.findViewById(R.id.name);
+            TextView emailTextView = view.findViewById(R.id.email);
+            TextView phoneTextView = view.findViewById(R.id.phone);
+            ImageView profileImageView = view.findViewById(R.id.circleImageView);
 
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading user information...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+            ProgressDialog progressDialog = new ProgressDialog(requireContext());
+            progressDialog.setMessage("Loading user information...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-        DocumentReference userRef = firestore.collection("users").document(userId);
+            DocumentReference userRef = firestore.collection("users").document(userId);
 
-        userRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                User user1 = documentSnapshot.toObject(User.class);
-                nameTextView.setText(user1.getName());
-                emailTextView.setText(user1.getEmail());
-                phoneTextView.setText(user1.getPhone());
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (isAdded() && requireContext() != null) {
+                    if (documentSnapshot.exists()) {
+                        User user1 = documentSnapshot.toObject(User.class);
+                        nameTextView.setText(user1.getName());
+                        emailTextView.setText(user1.getEmail());
+                        phoneTextView.setText(user1.getPhone());
 
-                StorageReference profileImageRef = storageReference.child("profile_images")
-                        .child(userId + ".jpg");
+                        StorageReference profileImageRef = storageReference.child("profile_images")
+                                .child(userId + ".jpg");
 
-                progressDialog.setMessage("Loading profile image...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                        progressDialog.setMessage("Loading profile image...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
 
-                profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    RequestOptions requestOptions = new RequestOptions()
-                            .placeholder(R.drawable.user)
-                            .error(R.drawable.user);
+                        profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            RequestOptions requestOptions = new RequestOptions()
+                                    .placeholder(R.drawable.user)
+                                    .error(R.drawable.user);
 
-                    Glide.with(requireContext())
-                            .setDefaultRequestOptions(requestOptions)
-                            .load(uri)
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    progressDialog.dismiss();
-                                    return false;
-                                }
+                            Glide.with(requireContext())
+                                    .setDefaultRequestOptions(requestOptions)
+                                    .load(uri)
+                                    .listener(new RequestListener<Drawable>() {
+                                        @Override
+                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                            progressDialog.dismiss();
+                                            return false;
+                                        }
 
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    progressDialog.dismiss();
-                                    return false;
-                                }
-                            })
-                            .into(profileImageView);
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getActivity(), "Failed to load profile image", Toast.LENGTH_SHORT).show();
+                                        @Override
+                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                            progressDialog.dismiss();
+                                            return false;
+                                        }
+                                    })
+                                    .into(profileImageView);
+                        }).addOnFailureListener(e -> {
+                            if (isAdded() && requireContext() != null) {
+                                Toast.makeText(requireContext(), "Failed to load profile image", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
                     progressDialog.dismiss();
-                });
-            }
-            progressDialog.dismiss();
-        }).addOnFailureListener(e -> {
-            Toast.makeText(getActivity(), "Failed to load user data", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-        });
+                }
+            }).addOnFailureListener(e -> {
+                if (isAdded() && requireContext() != null) {
+                    Toast.makeText(requireContext(), "Failed to load user data", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+        }
     }
 }

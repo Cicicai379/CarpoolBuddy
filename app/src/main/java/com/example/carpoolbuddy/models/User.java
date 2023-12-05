@@ -7,7 +7,7 @@ public class User {
     private String name;
     private String email;
     private String userType;
-
+    private String imageUrl;
     private String phone;
     private double priceMultiplier;
     private ArrayList<String> ownedVehicles;
@@ -16,19 +16,21 @@ public class User {
 
     }
 
-    public User(String uid, String email, String username){
-        this.uid = uid;
-        this.email = email;
-        this.name = username;
-    }
-    public User(String uid, String email, String username, String type){
+
+    public User(String uid, String username, String email,  String type){
         this.uid = uid;
         this.email = email;
         this.name = username;
         this.userType = type;
     }
 
-    public User(int a, String email, String username, String phone){
+    public User(String username, String email, String phone, String imageUrl, int t){
+        this.email = email;
+        this.name = username;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+    }
+    public User( String username,String email,  String phone){
         this.email = email;
         this.name = username;
         this.phone = phone;
@@ -87,5 +89,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

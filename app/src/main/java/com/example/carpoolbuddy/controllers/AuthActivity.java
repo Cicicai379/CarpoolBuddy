@@ -117,16 +117,13 @@ public class AuthActivity extends AppCompatActivity {
                 });
     }
 
-    public void updateUI(FirebaseUser currentUser){
-        if(currentUser != null){
+    public void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
     }
-    private void updateFirebase(String email, String password){
-        User user = new User(UUID.randomUUID().toString(), email, password);
-        firestore.collection("users").document(user.getUid()).set(user);
-    }
+
 
 
 

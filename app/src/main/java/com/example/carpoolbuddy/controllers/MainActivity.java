@@ -24,6 +24,7 @@ import com.example.carpoolbuddy.controllers.fragments.ProfileFragment;
 import com.example.carpoolbuddy.controllers.fragments.RidesFragment;
 import com.example.carpoolbuddy.databinding.ActivityMainBinding;
 import com.example.carpoolbuddy.models.Vehicle;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,7 +38,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
-
+    private BottomNavigationView bottomNavigationView;
     ActivityMainBinding binding;
 
     @Override
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         //Set up firebase auth and firestore instances
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -68,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+
     }
 
 
@@ -191,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -205,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_layout, new ProfileFragment())
                         .commit();
+
+
             }
         }
     }

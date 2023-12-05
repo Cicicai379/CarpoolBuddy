@@ -152,7 +152,6 @@ public class LoadingActivity extends AppCompatActivity {
                         finish();
                     }
                 }, 2000);
-                throw new RuntimeException();
             }
         }
     }
@@ -196,7 +195,7 @@ public class LoadingActivity extends AppCompatActivity {
     private void updateFirebase(String email, String username){
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        User user = new User(currentUser.getUid(), email, username, user_type);
+        User user = new User(currentUser.getUid(), username, email,  user_type);
         firestore.collection("users").document(user.getUid()).set(user);
     }
 
