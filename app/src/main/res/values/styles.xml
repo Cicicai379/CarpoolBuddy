@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Other theme attributes -->
+
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Customize the text appearance -->
+        <item name="android:textAppearance">@style/SearchViewTextAppearance</item>
+        <!-- Customize the background -->
+        <item name="android:background">@drawable/custom_searchview_background</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">24dp</item>
+
+
+    </style>
+
+    <style name="SearchViewTextAppearance" parent="TextAppearance.AppCompat">
+        <!-- Customize the font -->
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <!-- Add any other desired text attributes -->
+    </style>
+</resources>

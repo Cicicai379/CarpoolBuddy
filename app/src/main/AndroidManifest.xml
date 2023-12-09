@@ -58,16 +58,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".controllers.MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".controllers.MapsActivity"
+            android:exported="false"
+            android:label="activity_maps" />
+
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAZ4dtpOHzJAe0DZMwQQMxinVvpDGNj64c" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAZ4dtpOHzJAe0DZMwQQMxinVvpDGNj64c" />
     </application>
 
 </manifest>

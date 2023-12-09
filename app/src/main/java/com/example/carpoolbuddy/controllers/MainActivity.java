@@ -1,5 +1,12 @@
 package com.example.carpoolbuddy.controllers;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -8,6 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.view.MotionEvent;
 import android.widget.TableLayout;
 import android.content.Intent;
@@ -24,6 +33,13 @@ import com.example.carpoolbuddy.controllers.fragments.ProfileFragment;
 import com.example.carpoolbuddy.controllers.fragments.RidesFragment;
 import com.example.carpoolbuddy.databinding.ActivityMainBinding;
 import com.example.carpoolbuddy.models.Vehicle;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,6 +48,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private BottomNavigationView bottomNavigationView;
     ActivityMainBinding binding;
+    private GoogleMap myMap;
+    private SearchView mapSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +69,38 @@ public class MainActivity extends AppCompatActivity {
         //Set up firebase auth and firestore instances
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+//        mapSearchView = findViewById(R.id.mapSearch);
+//
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
+//
+//        mapSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+//            @Override
+//            public boolean onQueryTextSubmit(String s){
+//                String location = mapSearchView.getQuery().toString();
+//                List<Address> addressList = null;
+//                if(location !=null){
+//                    Geocoder geocoder = new Geocoder (MainActivity.this);
+//                    try{
+//                        addressList = geocoder.getFromLocationName(location, 1);
+//                    }catch (IOException e){
+//
+//                    }
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s){
+//                return false;
+//                }
+//        });
+//
+//
+//        mapFragment.getMapAsync((OnMapReadyCallback) MainActivity.this);
+
+
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
@@ -84,7 +133,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
+//
+//    @Override
+//    public void onMapReady(@NonNull GoogleMap googleMap) {
+//
+//        myMap = googleMap;
+//
+//        LatLng sydney = new LatLng(-34, 151);
+//        myMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        MarkerOptions options = new MarkerOptions().position(sydney).title("Sydney");
+//        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//        myMap.addMarker(options);
+//
+//    }
 
     private void getDataAndDisplay(){
         //get data from firebase

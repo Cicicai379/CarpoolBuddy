@@ -8,34 +8,45 @@
     android:orientation="vertical"
     tools:context=".controllers.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/frame_layout"
-        android:layout_width="416dp"
-        android:layout_height="775dp"
-        android:layout_marginBottom="71dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Divider line -->
+
+    <View
+        android:id="@+id/divider_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="767dp"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RelativeLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="411dp"
+        android:layout_height="773dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Add your content here -->
+
+    </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="409dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="78dp"
+        app:barrierDirection="top"
         app:itemActiveIndicatorStyle="@color/t"
-        app:itemBackground="@color/t"
-        app:itemIconTint="@color/white"
+        app:itemBackground="@color/white"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/black"
         app:itemRippleColor="@color/t"
         app:itemTextAppearanceActive="@color/white"
         app:itemTextAppearanceInactive="@color/white"
-        app:itemTextColor="#FFFFFF"
+        app:itemTextColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
