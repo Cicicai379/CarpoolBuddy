@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+            <item>Car</item>
+            <item>Bike</item>
+            <item>Segway</item>
+            <!-- Add more items as needed -->
+    </string-array>
+</resources>

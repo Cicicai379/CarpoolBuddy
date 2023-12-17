@@ -4,9 +4,7 @@ public class Helicopter extends Vehicle{
     private int maxAltitude;
     private int maxAirSpeed;
 
-    public Helicopter(String id, String owner, String model, int capacity, String contact, double price, String type) {
-        super(id, owner, model, capacity, contact, price, type);
-    }
+
 
     public int getMaxAirSpeed() {
         return maxAirSpeed;

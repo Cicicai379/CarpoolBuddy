@@ -14,15 +14,16 @@
         android:id="@+id/divider_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="767dp"
-        android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="78dp"
+        android:background="#8F8F8F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
         android:id="@+id/frame_layout"
-        android:layout_width="411dp"
-        android:layout_height="773dp"
+        android:layout_width="match_parent"
+        android:layout_height="765dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

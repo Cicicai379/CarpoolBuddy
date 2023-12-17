@@ -5,9 +5,6 @@ public class Bike extends Vehicle{
     private int weight;
     private int weightCapacity;
     private String bycicleType;
-    public Bike(String id, String owner, String model, int capacity, String contact, double price, String type) {
-        super(id, owner, model, capacity, contact, price, type);
-    }
 
     public int getWeightCapacity() {
         return weightCapacity;

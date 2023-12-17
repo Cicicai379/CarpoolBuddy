@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Create owner TextView
                     TextView ownerTextView = new TextView(this);
-                    ownerTextView.setText(vehicle.getOwner());
+//                    ownerTextView.setText(vehicle.getOwner());
                     ownerTextView.setPadding(8, 8, 8, 8);
                     ownerTextView.setTextAppearance(android.R.style.TextAppearance_Medium);
                     ownerTextView.setTextColor(Color.WHITE);
