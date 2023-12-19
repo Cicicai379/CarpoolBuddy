@@ -101,8 +101,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
             RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.user)
-                    .error(R.drawable.user);
+                    .placeholder(null);
 
             Glide.with(this)
                     .setDefaultRequestOptions(requestOptions)
@@ -205,7 +204,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void back(View view) {
         Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
-        intent.putExtra("fragmentToLoad", "profile");
         startActivity(intent);
     }
 

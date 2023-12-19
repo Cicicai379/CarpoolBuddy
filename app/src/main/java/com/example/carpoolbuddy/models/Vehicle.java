@@ -1,9 +1,5 @@
 package com.example.carpoolbuddy.models;
 
-import android.location.Location;
-
-import com.google.android.libraries.places.api.model.Place;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,40 +14,38 @@ public class Vehicle implements Serializable {
     private boolean open;
     private String vehicleType;
     private double price;
-    private Calendar time;
+    private CTime time;
 
-    private Place pickUpLocation;
-    private Place dropOffLocation;
+    private CLocation pickUpLocation;
+    private CLocation dropOffLocation;
 
-
-    public Vehicle(){
-
+    public Vehicle() {
     }
-    public Vehicle(String id, User owner, int capacity, double price, String type, Place p, Place d, Calendar time) {
+
+    public Vehicle(String id, User owner, int capacity, double price, String type, CLocation p, CLocation d, CTime time) {
         this.vehicleID = id;
         this.owner = owner;
         this.capacity = capacity;
         this.price = price;
-        this.vehicleType= type;
+        this.vehicleType = type;
         this.pickUpLocation = p;
         this.dropOffLocation = d;
         this.time = time;
     }
 
-    public Calendar getTime() {
+    public CTime getTime() {
         return time;
     }
 
-    public void setTime(Calendar time) {
+    public void setTime(CTime time) {
         this.time = time;
     }
-// Getters
 
-    public Place getDropOffLocation() {
+    public CLocation getDropOffLocation() {
         return dropOffLocation;
     }
 
-    public Place getPickUpLocation() {
+    public CLocation getPickUpLocation() {
         return pickUpLocation;
     }
 
@@ -59,11 +53,11 @@ public class Vehicle implements Serializable {
         this.capacity = capacity;
     }
 
-    public void setDropOffLocation(Place dropOffLocation) {
+    public void setDropOffLocation(CLocation dropOffLocation) {
         this.dropOffLocation = dropOffLocation;
     }
 
-    public void setPickUpLocation(Place pickUpLocation) {
+    public void setPickUpLocation(CLocation pickUpLocation) {
         this.pickUpLocation = pickUpLocation;
     }
 
@@ -103,7 +97,6 @@ public class Vehicle implements Serializable {
         return capacity;
     }
 
-    // Setters
     public void setOwner(User owner) {
         this.owner = owner;
     }

@@ -26,6 +26,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.R;
 import com.example.carpoolbuddy.controllers.AuthActivity;
 import com.example.carpoolbuddy.controllers.profile.EditProfileActivity;
+import com.example.carpoolbuddy.controllers.profile.HelpActivity;
 import com.example.carpoolbuddy.controllers.profile.MessageMainActivity;
 import com.example.carpoolbuddy.models.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,6 +76,11 @@ public class ProfileFragment extends Fragment {
         messageButton.setOnClickListener(v -> openMessageMainActivity());
         messageIcon.setOnClickListener(v -> openMessageMainActivity());
 
+        TextView helpButton = view.findViewById(R.id.help);
+        ImageView helpIcon = view.findViewById(R.id.help2);
+        helpButton.setOnClickListener(v -> openHelpMainActivity());
+        helpIcon.setOnClickListener(v -> openHelpMainActivity());
+
         getUserData(view);
 
         return view;
@@ -98,6 +104,11 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
         getActivity().finish();
     }
+    private void openHelpMainActivity() {
+        Intent intent = new Intent(getActivity(), HelpActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
 
     @SuppressLint("SetTextI18n")
     private void getUserData(View view) {
@@ -107,7 +118,7 @@ public class ProfileFragment extends Fragment {
 
             TextView nameTextView = view.findViewById(R.id.name);
             TextView emailTextView = view.findViewById(R.id.email);
-            TextView phoneTextView = view.findViewById(R.id.phone);
+            TextView phoneTextView = view.findViewById(R.id.vehicle_phone);
             ImageView profileImageView = view.findViewById(R.id.circleImageView);
 
             ProgressDialog progressDialog = new ProgressDialog(requireContext());
@@ -134,8 +145,7 @@ public class ProfileFragment extends Fragment {
 
                         profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                             RequestOptions requestOptions = new RequestOptions()
-                                    .placeholder(R.drawable.user)
-                                    .error(R.drawable.user);
+                                    .placeholder(null);
 
                             Glide.with(requireContext())
                                     .setDefaultRequestOptions(requestOptions)

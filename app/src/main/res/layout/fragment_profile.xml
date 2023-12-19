@@ -80,7 +80,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/phone"
+            android:id="@+id/vehicle_phone"
             android:layout_width="181dp"
             android:layout_height="30dp"
             android:layout_marginStart="112dp"
@@ -139,7 +139,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/message4"
+            android:id="@+id/help"
             android:layout_width="138dp"
             android:layout_height="36dp"
             android:layout_marginStart="88dp"
@@ -169,7 +169,7 @@
             app:srcCompat="@drawable/back" />
 
         <ImageView
-            android:id="@+id/message5"
+            android:id="@+id/help2"
             android:layout_width="22dp"
             android:layout_height="28dp"
             android:layout_marginStart="340dp"

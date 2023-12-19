@@ -1,5 +1,7 @@
 package com.example.carpoolbuddy.controllers.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.explore.BikesActivity;
+import com.example.carpoolbuddy.controllers.explore.CarsActivity;
+import com.example.carpoolbuddy.controllers.explore.HelicoptersActivity;
+import com.example.carpoolbuddy.controllers.explore.SegwaysActivity;
+import com.example.carpoolbuddy.controllers.profile.MessageMainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +58,7 @@ public class ExploreFragment extends Fragment {
         return fragment;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +66,43 @@ public class ExploreFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false);
+        View view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+        ImageView helpButton = view.findViewById(R.id.cars);
+        helpButton.setOnClickListener(v -> openCarsActivity());
+        ImageView bikesButton = view.findViewById(R.id.bikes);
+        bikesButton.setOnClickListener(v -> openBikesActivity());
+        ImageView helicoptersButton = view.findViewById(R.id.helicopters);
+        helicoptersButton.setOnClickListener(v -> openHelicoptersActivity());
+        ImageView segwayButton = view.findViewById(R.id.segways);
+        segwayButton.setOnClickListener(v -> openSegwaysActivity());
+        return view;
+    }
+
+    private void openCarsActivity() {
+        Intent intent = new Intent(getActivity(), CarsActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+    private void openBikesActivity() {
+        Intent intent = new Intent(getActivity(), BikesActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }private void openHelicoptersActivity() {
+        Intent intent = new Intent(getActivity(), HelicoptersActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }private void openSegwaysActivity() {
+        Intent intent = new Intent(getActivity(), SegwaysActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

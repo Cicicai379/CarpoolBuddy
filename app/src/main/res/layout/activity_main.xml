@@ -22,8 +22,8 @@
 
     <RelativeLayout
         android:id="@+id/frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="765dp"
+        android:layout_width="411dp"
+        android:layout_height="767dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

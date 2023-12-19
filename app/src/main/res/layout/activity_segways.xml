@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.explore.SegwaysActivity">
+
+    <ImageView
+        android:id="@+id/imageView34"
+        android:layout_width="58dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:elevation="15dp"
+        android:src="@drawable/baseline_moped_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#64A2ED" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="411dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Segways"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="411dp"
+        android:layout_height="739dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="85dp"
+        android:overScrollMode="never"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </ScrollView>
+
+
+    <ImageView
+        android:id="@+id/imageView35"
+        android:layout_width="47dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="338dp"
+        android:layout_marginTop="28dp"
+        android:onClick="back"
+        android:tint="@color/t"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_clear_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

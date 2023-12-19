@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".controllers.fragments.ExploreFragment">
-
+    tools:context=".controllers.fragments.RidesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +21,187 @@
             android:textSize="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="409dp"
+            android:layout_height="745dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="341dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="96dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Share the Ride, Multiply the Joy!"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView40"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="212dp"
+                android:layout_marginEnd="64dp"
+                android:elevation="15dp"
+                android:src="@drawable/baseline_pedal_bike_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="69dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Cars"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="119dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="228dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Segways"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.21"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="65dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Bikes"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="134dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="228dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Helicopters"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.825"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <ImageView
+                android:id="@+id/bikes"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="184dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="#7A61EC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/cars"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="184dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="@color/t"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.133"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/segways"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="404dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="#64A2ED"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.133"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+
+            <ImageView
+                android:id="@+id/helicopters"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="404dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="#F85D5D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/imageView39"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="208dp"
+                android:elevation="15dp"
+                android:src="@drawable/baseline_directions_car_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imageView41"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="61dp"
+                android:layout_marginTop="428dp"
+                android:layout_marginEnd="248dp"
+                android:elevation="15dp"
+                android:src="@drawable/baseline_moped_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imageView42"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="428dp"
+                android:layout_marginEnd="64dp"
+                android:elevation="15dp"
+                android:src="@drawable/baseline_airplanemode_active_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

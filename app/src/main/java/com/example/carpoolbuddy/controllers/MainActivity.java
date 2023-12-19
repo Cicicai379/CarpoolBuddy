@@ -1,23 +1,13 @@
 package com.example.carpoolbuddy.controllers;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
-import android.view.MotionEvent;
 import android.widget.TableLayout;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,30 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.explore.VehicleProfileActivity;
 import com.example.carpoolbuddy.controllers.fragments.ExploreFragment;
 import com.example.carpoolbuddy.controllers.fragments.HomeFragment;
 import com.example.carpoolbuddy.controllers.fragments.ProfileFragment;
 import com.example.carpoolbuddy.controllers.fragments.RidesFragment;
 import com.example.carpoolbuddy.databinding.ActivityMainBinding;
 import com.example.carpoolbuddy.models.Vehicle;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

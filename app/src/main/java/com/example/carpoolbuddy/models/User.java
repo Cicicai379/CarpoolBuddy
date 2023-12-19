@@ -11,13 +11,20 @@ public class User {
     private String phone;
     private double priceMultiplier;
     private ArrayList<String> ownedVehicles;
-
+    private double rating = 5.00;
     public User(){
 
     }
 
+    public double getRating() {
+        return rating;
+    }
 
-    public User(String uid, String username, String email,  String type){
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public User(String uid, String username, String email, String type){
         this.uid = uid;
         this.email = email;
         this.name = username;

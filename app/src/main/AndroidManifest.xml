@@ -43,7 +43,7 @@
             android:name=".controllers.AppInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".controllers.VehicleProfileActivity"
+            android:name=".controllers.explore.VehicleProfileActivity"
             android:exported="false" />
         <activity
             android:name=".controllers.AddVehicleActivity"
@@ -61,6 +61,18 @@
 
         <activity
             android:name=".controllers.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.explore.CarsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.explore.BikesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.explore.HelicoptersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.explore.SegwaysActivity"
             android:exported="false" />
 
         <activity
