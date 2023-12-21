@@ -44,12 +44,12 @@
         android:id="@+id/imageView"
         android:layout_width="83dp"
         android:layout_height="57dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginBottom="180dp"
+        android:layout_marginBottom="188dp"
         android:onClick="SignInWithGoogle"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/googleg_standard_color_18" />
+        app:srcCompat="@drawable/google" />
 
     <Button
         android:id="@+id/signup2"
