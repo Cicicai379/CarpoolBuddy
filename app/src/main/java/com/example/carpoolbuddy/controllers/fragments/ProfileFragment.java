@@ -96,18 +96,18 @@ public class ProfileFragment extends Fragment {
     private void openEditProfileActivity() {
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
 
     private void openMessageMainActivity() {
         Intent intent = new Intent(getActivity(), MessageMainActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
     private void openHelpMainActivity() {
         Intent intent = new Intent(getActivity(), HelpActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
 
     @SuppressLint("SetTextI18n")

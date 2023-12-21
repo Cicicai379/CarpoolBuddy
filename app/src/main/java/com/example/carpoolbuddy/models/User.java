@@ -10,7 +10,7 @@ public class User {
     private String imageUrl;
     private String phone;
     private double priceMultiplier;
-    private ArrayList<String> ownedVehicles;
+    public ArrayList<Vehicle> ownedVehicles= new ArrayList<Vehicle>();;
     private double rating = 5.00;
     public User(){
 
@@ -25,6 +25,7 @@ public class User {
     }
 
     public User(String uid, String username, String email, String type){
+        ownedVehicles= new ArrayList<Vehicle>();
         this.uid = uid;
         this.email = email;
         this.name = username;
@@ -32,12 +33,14 @@ public class User {
     }
 
     public User(String username, String email, String phone, String imageUrl, int t){
+        ownedVehicles= new ArrayList<Vehicle>();
         this.email = email;
         this.name = username;
         this.phone = phone;
         this.imageUrl = imageUrl;
     }
     public User( String username,String email,  String phone){
+        ownedVehicles= new ArrayList<Vehicle>();
         this.email = email;
         this.name = username;
         this.phone = phone;
@@ -82,11 +85,11 @@ public class User {
         this.priceMultiplier = priceMultiplier;
     }
 
-    public ArrayList<String> getOwnedVehicles() {
+    public ArrayList<Vehicle> getOwnedVehicles() {
         return ownedVehicles;
     }
 
-    public void setOwnedVehicles(ArrayList<String> ownedVehicles) {
+    public void setOwnedVehicles(ArrayList<Vehicle> ownedVehicles) {
         this.ownedVehicles = ownedVehicles;
     }
 
@@ -100,6 +103,10 @@ public class User {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void addVehicle(Vehicle v) {
+        this.ownedVehicles.add(v);
     }
 
     public void setImageUrl(String imageUrl) {

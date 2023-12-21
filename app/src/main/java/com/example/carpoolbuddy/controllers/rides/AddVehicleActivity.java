@@ -1,8 +1,7 @@
-package com.example.carpoolbuddy.controllers;
+package com.example.carpoolbuddy.controllers.rides;
 
 import static android.app.PendingIntent.getActivity;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,17 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,26 +29,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.MainActivity;
 import com.example.carpoolbuddy.controllers.adapters.ThemedAutocompleteSupportFragment;
-import com.example.carpoolbuddy.models.Bike;
 import com.example.carpoolbuddy.models.CLocation;
 import com.example.carpoolbuddy.models.CTime;
-import com.example.carpoolbuddy.models.Car;
-import com.example.carpoolbuddy.models.Helicopter;
-import com.example.carpoolbuddy.models.Segway;
 import com.example.carpoolbuddy.models.User;
 import com.example.carpoolbuddy.models.Vehicle;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -63,7 +49,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.type.DateTime;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -217,7 +202,7 @@ public class AddVehicleActivity extends AppCompatActivity {
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                time = new CTime(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,Calendar.HOUR_OF_DAY,Calendar.MINUTE);
+                                time = new CTime(year,month,dayOfMonth,hour,minute);
                                 // Update the selectedTimeTV with the selected time
                                 String selectedDateTime = hourOfDay + ":" + minute + " " + dayOfMonth + "/" + (month + 1) + "/" + year;
                                 selectedTimeTV.setText(selectedDateTime);
@@ -275,8 +260,9 @@ public class AddVehicleActivity extends AppCompatActivity {
                 user = documentSnapshot.toObject(User.class);
             }
             Vehicle vehicle = new Vehicle(UUID.randomUUID().toString(), user, capacity, price, type, pl, dl, time);
-            // Generate a unique filename for the image
             String imageName = vehicle.getVehicleID()+".png";
+
+            firestore.collection("users").document(userId).set(user);
 
             StorageReference imageRef = storageReference.child(imageName);
             UploadTask uploadTask = imageRef.putFile(imageUri);
@@ -366,9 +352,17 @@ public class AddVehicleActivity extends AppCompatActivity {
             });
 
     public void back(View w){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

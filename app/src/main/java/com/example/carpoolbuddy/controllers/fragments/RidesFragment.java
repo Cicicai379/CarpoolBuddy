@@ -1,9 +1,12 @@
 package com.example.carpoolbuddy.controllers.fragments;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,10 +14,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.R;
-import com.example.carpoolbuddy.controllers.AddVehicleActivity;
-import com.example.carpoolbuddy.controllers.AuthActivity;
+import com.example.carpoolbuddy.controllers.rides.AddVehicleActivity;
+import com.example.carpoolbuddy.controllers.explore.VehicleProfileActivity;
+import com.example.carpoolbuddy.controllers.rides.MyTripProfileActivity;
+import com.example.carpoolbuddy.controllers.rides.MyVehicleProfileActivity;
+import com.example.carpoolbuddy.models.User;
+import com.example.carpoolbuddy.models.Vehicle;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +51,14 @@ public class RidesFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
+    private StorageReference storageReference;
+    private FirebaseUser curuser;
+    private String userId;
+    private User user;
+    private ArrayList<Vehicle> vehicles;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -68,15 +102,220 @@ public class RidesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rides, container, false);
-
+         firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        curuser = mAuth.getCurrentUser();
+        userId = curuser.getUid();
         ImageView addButton = view.findViewById(R.id.add_button);
         addButton.setOnClickListener(v -> toAdd());
+
+        Button ridesButton = view.findViewById(R.id.myvehicles);
+        ridesButton.setOnClickListener(v -> showMyRides(view));
+
+        Button tripsButton = view.findViewById(R.id.mytrips);
+        tripsButton.setOnClickListener(v -> showMyTrips(view));
+        showMyTrips(view);
         return view;
     }
 
     private void toAdd() {
         Intent intent = new Intent(getActivity(), AddVehicleActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
+
+    private void showMyRides(View view) {
+        LinearLayout linearLayout = view.findViewById(R.id.linear);
+        linearLayout.removeAllViews();
+        ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        CollectionReference carsCollectionRef = firestore.collection("vehicles").document("cars").collection("cars");
+        carsCollectionRef.get().addOnCompleteListener(task -> {
+            progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
+
+            if (task.isSuccessful()) {
+                List<Vehicle> vehicles = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Vehicle vehicle = document.toObject(Vehicle.class);
+
+                    if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
+                        vehicles.add(vehicle);
+                    }
+                }
+
+                renderLayoutRows(view, vehicles,false);
+            } else {
+                Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        CollectionReference b = firestore.collection("vehicles").document("bikes").collection("bikes");
+        b.get().addOnCompleteListener(task -> {
+            progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
+
+            if (task.isSuccessful()) {
+                List<Vehicle> vehicles = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Vehicle vehicle = document.toObject(Vehicle.class);
+
+                    if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
+                        vehicles.add(vehicle);
+                    }
+                }
+
+                renderLayoutRows(view, vehicles,false);
+            } else {
+                Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        CollectionReference h = firestore.collection("vehicles").document("helicopters").collection("helicopters");
+        h.get().addOnCompleteListener(task -> {
+            progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
+
+            if (task.isSuccessful()) {
+                List<Vehicle> vehicles = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Vehicle vehicle = document.toObject(Vehicle.class);
+
+                    if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
+                        vehicles.add(vehicle);
+                    }
+                }
+
+                renderLayoutRows(view, vehicles, false);
+            } else {
+                Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        CollectionReference s = firestore.collection("vehicles").document("segways").collection("segways");
+        s.get().addOnCompleteListener(task -> {
+            progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
+
+            if (task.isSuccessful()) {
+                List<Vehicle> vehicles = new ArrayList<>();
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Vehicle vehicle = document.toObject(Vehicle.class);
+
+                    if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
+                        vehicles.add(vehicle);
+                    }
+                }
+
+                renderLayoutRows(view, vehicles,false);
+            } else {
+                Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showMyTrips(View view) {
+        LinearLayout linearLayout = view.findViewById(R.id.linear);
+        linearLayout.removeAllViews();
+        System.out.println("showMyTrips...");
+        ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        CollectionReference carsCollectionRef = firestore.collection("reservations").document(userId).collection(userId);
+        carsCollectionRef.get().addOnCompleteListener(task -> {
+            System.out.println("getting"+userId);
+
+            progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
+            if (task.isSuccessful()) {
+                System.out.println("successful");
+
+                List<Vehicle> vehicles = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Vehicle vehicle = document.toObject(Vehicle.class);
+                    if (!vehicle.isEnd()) {
+                        vehicles.add(vehicle);
+                    }
+                }
+                renderLayoutRows(view, vehicles, true);
+            } else {
+                Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @SuppressLint("SetTextI18n")
+    private void renderLayoutRows(View view, List<Vehicle> vehicles, boolean trip) {
+        LayoutInflater inflater = LayoutInflater.from(view.getContext());
+        LinearLayout linearLayout = view.findViewById(R.id.linear);
+
+        for (Vehicle vehicle : vehicles) {
+            View rowView = inflater.inflate(R.layout.vehicle_row, null);
+            TextView ownerTextView = rowView.findViewById(R.id.owner);
+            TextView locationTextView = rowView.findViewById(R.id.location);
+            TextView infoTextView = rowView.findViewById(R.id.info);
+
+
+            locationTextView.setText(vehicle.getPickUpLocation().getAddress() + " to "+vehicle.getDropOffLocation().getAddress());
+            ownerTextView.setText(vehicle.getOwner().getName() + ": " + vehicle.getOwner().getRating());
+            infoTextView.setText(vehicle.getPrice() + " HKD | " + vehicle.getTime().toString() + " | " + vehicle.getCapacity() + " seats");
+
+            // Load the image using the vehicle ID
+            ImageView imageView = rowView.findViewById(R.id.image);
+            String imageName = vehicle.getVehicleID()+".png";
+            System.out.println(imageName);
+            StorageReference imageRef = storageReference.child("vehicles")
+                    .child(imageName);
+            System.out.println("ref:"+imageRef);
+            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                System.out.println("URL:"+uri);
+
+                RequestOptions requestOptions = new RequestOptions()
+                        .placeholder(null);
+
+
+                Glide.with(this)
+                        .setDefaultRequestOptions(requestOptions)
+                        .load(uri)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                return false;
+                            }
+                        })
+                        .into(imageView);
+            }).addOnFailureListener(e -> {
+                Drawable d = getResources().getDrawable(R.drawable.rectangle_grey);
+                imageView.setImageDrawable(d);
+                System.out.println(e+" error");
+//                            Toast.makeText(this, "Failed to load profile images", Toast.LENGTH_SHORT).show();
+            });
+
+
+            // Set onClickListener to the row view
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Start another activity and pass the vehicleId as extra
+                     Intent intent = new Intent(view.getContext(), MyVehicleProfileActivity.class);
+                    if(trip) intent = new Intent(view.getContext(), MyTripProfileActivity.class);
+                    intent.putExtra("vehicleId", vehicle.getVehicleID());
+                    intent.putExtra("type", "Car");
+
+                    startActivity(intent);
+                }
+            });
+
+            linearLayout.addView(rowView);
+        }
+    }
+
+
+
 }

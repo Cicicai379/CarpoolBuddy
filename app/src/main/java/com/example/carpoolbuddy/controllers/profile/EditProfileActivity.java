@@ -2,9 +2,9 @@ package com.example.carpoolbuddy.controllers.profile;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -203,8 +204,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     public void back(View view) {
-        Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+//        startActivity(intent);
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
 
     @Override

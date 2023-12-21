@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,8 +70,16 @@ public class MessageMainActivity extends AppCompatActivity implements MessageAda
     }
 
     public void back(View w) {
-        Intent intent = new Intent(MessageMainActivity.this, MainActivity.class);
-        intent.putExtra("fragmentToLoad", "profile");
-        startActivity(intent);
+//        Intent intent = new Intent(MessageMainActivity.this, MainActivity.class);
+//        intent.putExtra("fragmentToLoad", "profile");
+//        startActivity(intent);
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
 }

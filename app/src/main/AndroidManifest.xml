@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarpoolBUddy"
         tools:targetApi="31">
+        <activity android:name="com.example.carpoolbuddy.controllers.rides.MyTripProfileActivity" />
+        <activity
+            android:name=".controllers.rides.MyVehicleProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".controllers.profile.MessageMainActivity"
             android:exported="false" />
@@ -46,9 +52,8 @@
             android:name=".controllers.explore.VehicleProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".controllers.AddVehicleActivity"
+            android:name=".controllers.rides.AddVehicleActivity"
             android:exported="false" />
-
         <activity
             android:name=".controllers.AuthActivity"
             android:exported="true">
@@ -58,7 +63,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".controllers.MainActivity"
             android:exported="false" />
@@ -74,12 +78,10 @@
         <activity
             android:name=".controllers.explore.SegwaysActivity"
             android:exported="false" />
-
         <activity
             android:name=".controllers.MapsActivity"
             android:exported="false"
             android:label="activity_maps" />
-
 
         <meta-data
             android:name="preloaded_fonts"

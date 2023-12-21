@@ -17,188 +17,353 @@
             android:layout_marginStart="29dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/montserrat_extrabold"
-            android:text="Explore"
+            android:text="Home"
             android:textSize="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="409dp"
-            android:layout_height="745dp"
+            android:layout_height="822dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="0dp">
+
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="374dp"
+                android:layout_height="144dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="137dp"
+                android:src="@drawable/rectangle"
+                android:tint="#6DEEE7FA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView28"
+                android:layout_width="375dp"
+                android:layout_height="216dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="317dp"
+                android:src="@drawable/rectangle"
+                android:tint="#6DEEE7FA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView29"
+                android:layout_width="372dp"
+                android:layout_height="167dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="568dp"
+                android:src="@drawable/rectangle"
+                android:tint="#6DEEE7FA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="341dp"
                 android:layout_height="41dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="96dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="88dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Share the Ride, Multiply the Joy!"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="341dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="300dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Daily Tips"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="341dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="552dp"
+                android:elevation="11dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Promotions"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/imageView40"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="212dp"
-                android:layout_marginEnd="64dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="168dp"
+                android:layout_marginEnd="234dp"
                 android:elevation="15dp"
                 android:src="@drawable/baseline_pedal_bike_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="69dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="Cars"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cars" />
 
             <TextView
                 android:id="@+id/textView24"
-                android:layout_width="119dp"
-                android:layout_height="37dp"
-                android:layout_marginTop="228dp"
+                android:layout_width="66dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Segways"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.21"
+                app:layout_constraintHorizontal_bias="0.629"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cars" />
 
             <TextView
                 android:id="@+id/textView22"
-                android:layout_width="65dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="43dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Bikes"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintHorizontal_bias="0.365"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cars" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView40" />
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="134dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="228dp"
+                android:layout_width="96dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="9dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Helicopters"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.825"
+                app:layout_constraintHorizontal_bias="0.947"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cars" />
 
             <ImageView
-                android:id="@+id/bikes"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="184dp"
-                android:background="@drawable/rectangle"
-                android:elevation="8dp"
-                android:tint="#7A61EC"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.85"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rectangle" />
-
-            <ImageView
-                android:id="@+id/cars"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="184dp"
-                android:background="@drawable/rectangle"
-                android:elevation="8dp"
-                android:tint="@color/t"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.133"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rectangle" />
-
-            <ImageView
                 android:id="@+id/segways"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="404dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="160dp"
                 android:background="@drawable/rectangle"
                 android:elevation="8dp"
                 android:tint="#64A2ED"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.133"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rectangle" />
-
-
-            <ImageView
-                android:id="@+id/helicopters"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="404dp"
-                android:background="@drawable/rectangle"
-                android:elevation="8dp"
-                android:tint="#F85D5D"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintHorizontal_bias="0.618"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/rectangle" />
 
             <ImageView
                 android:id="@+id/imageView39"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="208dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="168dp"
                 android:elevation="15dp"
                 android:src="@drawable/baseline_directions_car_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="41dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Cars"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.118"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <ImageView
+                android:id="@+id/cars"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="160dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="@color/t"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.106"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/helicopters"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="304dp"
+                android:layout_marginTop="160dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="#F85D5D"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
             <ImageView
                 android:id="@+id/imageView41"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="61dp"
-                android:layout_marginTop="428dp"
-                android:layout_marginEnd="248dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="168dp"
                 android:elevation="15dp"
                 android:src="@drawable/baseline_moped_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
             <ImageView
+                android:id="@+id/bikes"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="160dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="#7A61EC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.356"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
                 android:id="@+id/imageView42"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="428dp"
-                android:layout_marginEnd="64dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="55dp"
                 android:elevation="15dp"
                 android:src="@drawable/baseline_airplanemode_active_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="27dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/baseline_celebration_24"
+                android:tint="#8E8C8C"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="27dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="136dp"
+                android:layout_marginTop="302dp"
+                android:src="@drawable/baseline_lightbulb_24"
+                android:tint="#8E8C8C"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="333dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="470dp"
+                android:layout_marginEnd="37dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="SDG Goal 11 · Sustainable Cities and Communities"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="310dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="492dp"
+                android:layout_marginEnd="60dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Carpooling = reduced carbon emission"
+                android:textColor="#807F7F"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView72"
+                android:layout_width="344dp"
+                android:layout_height="124dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="338dp"
+                android:src="@drawable/rectangle2"
+                android:tint="#fd9d25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView75"
+                android:layout_width="342dp"
+                android:layout_height="118dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="592dp"
+                android:src="@drawable/rectangle2"
+                android:tint="#EAEAEA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView74"
+                android:layout_width="164dp"
+                android:layout_height="109dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/sdg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.47" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="217dp"
+                android:layout_height="62dp"
+                android:layout_marginTop="604dp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:text="20% OFF"
+                android:textSize="44sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.524"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="136dp"
+                android:layout_marginTop="668dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="for all students"
+                android:textColor="#6C6C91"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,6 @@
 package com.example.carpoolbuddy.controllers.explore;
+import static android.icu.lang.UCharacter.toLowerCase;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -6,9 +8,15 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.controllers.MainActivity;
+import com.example.carpoolbuddy.models.User;
 import com.example.carpoolbuddy.models.Vehicle;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import androidx.annotation.NonNull;
@@ -16,6 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,9 +45,13 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class VehicleProfileActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
+    private FirebaseAuth mAuth;
+
     private StorageReference storageReference;
 
     private TextView plField;
@@ -48,6 +62,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
     private TextView hField;
     private String type;
     private TextView dField;
+    private Spinner spinner;
 
     private String vehicleId;
 
@@ -65,8 +80,10 @@ public class VehicleProfileActivity extends AppCompatActivity {
         }
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
-        Spinner spinner = findViewById(R.id.spinner);
+
+        spinner = findViewById(R.id.spinner);
         nameField = findViewById(R.id.vehicle_name);
         phoneField = findViewById(R.id.vehicle_phone);
         priceField = findViewById(R.id.vehicle_price);
@@ -159,13 +176,26 @@ public class VehicleProfileActivity extends AppCompatActivity {
     }
 
     public void back(View w) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//        finish();
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
 
     public void reserve(View w){
-        String collectionPath = "vehicles/cars/cars";
+        String collectionPath = "vehicles/"+toLowerCase(type)+"s"+"/"+toLowerCase(type)+"s";
+        System.out.println("reserving..."+collectionPath);
+
+        String selectedValue = spinner.getSelectedItem().toString();
+
+        int seats = Integer.parseInt(selectedValue);
         DocumentReference documentRef = firestore.collection(collectionPath).document(vehicleId);
         documentRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -174,20 +204,30 @@ public class VehicleProfileActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             int currentCapacity = document.getLong("capacity").intValue();
-                            int newCapacity = currentCapacity - 1;
+                            int newCapacity = currentCapacity - seats;
+
+                            if(newCapacity < 0){
+                                Toast.makeText(VehicleProfileActivity.this, "The ride is full, please refresh.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else if (newCapacity == 0){
+                                documentRef.update("open", false);
+                            }
 
                             documentRef.update("capacity", newCapacity)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> subTask) {
                                             if (subTask.isSuccessful()) {
-                                                Toast.makeText(VehicleProfileActivity.this, "Reserve ride info successful", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(VehicleProfileActivity.this, "Reserve ride info successful, reserved for "+seats+" people.", Toast.LENGTH_SHORT).show();
+                                                updateDb(document, seats);
                                                 Log.d("Firestore", "Capacity updated successfully for vehicle with ID: " + vehicleId);
                                             } else {
                                                 Log.e("Firestore", "Error updating capacity", task.getException());
                                                 Toast.makeText(VehicleProfileActivity.this, "Reserve ride info failed", Toast.LENGTH_SHORT).show();
                                             }
                                         }
+
+
                                     });
                         } else {
                             Log.d("Firestore", "Document with ID " + vehicleId + " does not exist.");
@@ -197,6 +237,58 @@ public class VehicleProfileActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
         }
+
+    private void updateDb(DocumentSnapshot document, int c) {
+        System.out.println("updating db");
+        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        System.out.println(userId);
+
+        Map<String, Object> vehicleData = document.getData();
+        vehicleData.put("capacity", c);
+
+        CollectionReference userReservationsRef = firestore.collection("reservations").document(userId).collection(userId);
+        userReservationsRef.document(vehicleId).set(vehicleData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Firestore", "Vehicle data stored in user reservations collection.");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Error storing vehicle data in user reservations collection", e);
+                    }
+                });
+
+            DocumentReference userRef = firestore.collection("users").document(userId);
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    User userdata = documentSnapshot.toObject(User.class);
+                    CollectionReference recordsRef = firestore.collection("records").document(vehicleId).collection(vehicleId);
+                    recordsRef.document(userId).set(userdata)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Firestore", "Vehicle data stored in user reservations collection.");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e("Firestore", "Error storing vehicle data in user reservations collection", e);
+                                }
+                            });
+                }
+            });
+
+    }
+
+
+
+
 
     }

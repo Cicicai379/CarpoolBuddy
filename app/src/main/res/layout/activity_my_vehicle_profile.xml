@@ -4,14 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:elevation="5dp"
-    android:onClick="SelectImage"
-    android:orientation="vertical"
-    tools:context=".controllers.rides.AddVehicleActivity">
+    tools:context=".controllers.rides.MyVehicleProfileActivity">
 
     <TextView
-        android:id="@+id/hour"
+        android:id="@+id/hour4"
         android:layout_width="321dp"
         android:layout_height="35dp"
         android:layout_marginStart="61dp"
@@ -25,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vehicle_name"
+        android:id="@+id/vehicle_name4"
         android:layout_width="321dp"
         android:layout_height="35dp"
         android:layout_marginStart="62dp"
@@ -38,35 +34,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="89dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="450dp"
-        android:drawSelectorOnTop="true"
-        android:dropDownVerticalOffset="-53dp"
-        android:elevation="10dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/textView38"
         android:layout_width="222dp"
         android:layout_height="16dp"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="456dp"
         android:elevation="5dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="Seats"
+        android:text="Current riders"
         android:textColor="#8C8A8A"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView37"
+        android:id="@+id/imageView53"
         android:layout_width="410dp"
         android:layout_height="501dp"
         android:layout_marginBottom="432dp"
@@ -76,7 +59,7 @@
         app:srcCompat="@drawable/rectangle_grey" />
 
     <ImageView
-        android:id="@+id/imageView44"
+        android:id="@+id/imageView59"
         android:layout_width="417dp"
         android:layout_height="492dp"
         android:layout_marginBottom="60dp"
@@ -88,7 +71,7 @@
         app:srcCompat="@drawable/rectangle_grey" />
 
     <ImageView
-        android:id="@+id/imageView54"
+        android:id="@+id/imageView60"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginStart="28dp"
@@ -103,7 +86,7 @@
         app:srcCompat="@drawable/baseline_calendar_month_24" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/textView39"
         android:layout_width="160dp"
         android:layout_height="17dp"
         android:layout_marginStart="60dp"
@@ -117,7 +100,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/date4"
         android:layout_width="321dp"
         android:layout_height="35dp"
         android:layout_marginStart="61dp"
@@ -137,7 +120,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/pl"
+        android:id="@+id/pl4"
         android:layout_width="321dp"
         android:layout_height="35dp"
         android:layout_marginStart="61dp"
@@ -150,7 +133,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vehicle_phone"
+        android:id="@+id/vehicle_phone4"
         android:layout_width="321dp"
         android:layout_height="35dp"
         android:layout_marginStart="62dp"
@@ -168,7 +151,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView45"
+        android:id="@+id/imageView61"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginStart="28dp"
@@ -179,10 +162,10 @@
         app:srcCompat="@drawable/baseline_location_on_24" />
 
     <ImageView
-        android:id="@+id/imageView55"
+        android:id="@+id/imageView62"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:layout_marginStart="232dp"
+        android:layout_marginStart="222dp"
         android:layout_marginTop="476dp"
         android:tint="@color/t"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +173,7 @@
         app:srcCompat="@drawable/baseline_people_24" />
 
     <TextView
-        android:id="@+id/dl"
+        android:id="@+id/dl4"
         android:layout_width="336dp"
         android:layout_height="56dp"
         android:layout_marginStart="60dp"
@@ -203,7 +186,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/textView40"
         android:layout_width="322dp"
         android:layout_height="16dp"
         android:layout_marginTop="368dp"
@@ -217,7 +200,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView46"
+        android:id="@+id/imageView63"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginStart="28dp"
@@ -231,7 +214,7 @@
         app:tint="@color/t" />
 
     <ImageView
-        android:id="@+id/imageView50"
+        android:id="@+id/imageView64"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginStart="28dp"
@@ -245,7 +228,7 @@
         app:srcCompat="@drawable/baseline_person_24" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/textView42"
         android:layout_width="322dp"
         android:layout_height="16dp"
         android:layout_marginStart="60dp"
@@ -258,21 +241,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/textView43"
         android:layout_width="340dp"
         android:layout_height="20dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="46dp"
         android:layout_marginTop="798dp"
         android:elevation="10dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="You could contact the owner to confirm the reservation"
+        android:text="After closing the ride, you and your rides will not see it"
         android:textColor="#8C8A8A"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/textView44"
         android:layout_width="322dp"
         android:layout_height="16dp"
         android:layout_marginStart="62dp"
@@ -285,7 +268,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView43"
+        android:id="@+id/imageView65"
         android:layout_width="413dp"
         android:layout_height="253dp"
         android:layout_marginTop="636dp"
@@ -296,7 +279,7 @@
         app:srcCompat="@drawable/rectangle_grey" />
 
     <ImageView
-        android:id="@+id/imageView38"
+        android:id="@+id/imageView66"
         android:layout_width="413dp"
         android:layout_height="253dp"
         android:layout_marginTop="700dp"
@@ -308,16 +291,16 @@
         app:srcCompat="@drawable/rectangle_grey" />
 
     <Button
-        android:id="@+id/close"
+        android:id="@+id/close2"
         android:layout_width="288dp"
         android:layout_height="64dp"
         android:layout_marginStart="62dp"
         android:layout_marginTop="730dp"
         android:elevation="10dp"
         android:fontFamily="@font/montserrat_medium"
-        android:onClick="reserve"
+        android:onClick="end"
         android:padding="8dp"
-        android:text="Reserve Ride"
+        android:text="Close Ride"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:backgroundTint="#4ecca3"
@@ -328,19 +311,19 @@
         app:strokeWidth="4dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView46"
         android:layout_width="411dp"
         android:layout_height="57dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Vehicle Details"
+        android:text="My Ride Details"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView36"
+        android:id="@+id/imageView67"
         android:layout_width="47dp"
         android:layout_height="49dp"
         android:layout_marginStart="338dp"
@@ -352,7 +335,7 @@
         app:srcCompat="@drawable/baseline_clear_24" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textView47"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginStart="36dp"
@@ -365,7 +348,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vehicle_price"
+        android:id="@+id/vehicle_price4"
         android:layout_width="92dp"
         android:layout_height="29dp"
         android:layout_marginStart="300dp"
@@ -378,7 +361,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView48"
+        android:id="@+id/imageView68"
         android:layout_width="420dp"
         android:layout_height="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -388,7 +371,7 @@
         tools:layout_editor_absoluteX="-8dp" />
 
     <ImageView
-        android:id="@+id/vehicle_image"
+        android:id="@+id/vehicle_image4"
         android:layout_width="355dp"
         android:layout_height="164dp"
         android:layout_marginStart="28dp"
@@ -396,5 +379,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ScrollView
+        android:layout_width="141dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="476dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/current_users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

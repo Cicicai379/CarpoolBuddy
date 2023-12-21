@@ -22,6 +22,7 @@ import com.example.carpoolbuddy.controllers.fragments.ExploreFragment;
 import com.example.carpoolbuddy.controllers.fragments.HomeFragment;
 import com.example.carpoolbuddy.controllers.fragments.ProfileFragment;
 import com.example.carpoolbuddy.controllers.fragments.RidesFragment;
+import com.example.carpoolbuddy.controllers.rides.AddVehicleActivity;
 import com.example.carpoolbuddy.databinding.ActivityMainBinding;
 import com.example.carpoolbuddy.models.Vehicle;
 import com.google.android.gms.maps.GoogleMap;
@@ -83,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+        replaceFragment(new ExploreFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
             switch (item.getItemId()){
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    replaceFragment(new ExploreFragment());
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new RidesFragment());
                     break;
                 case R.id.explore:
-                    replaceFragment(new ExploreFragment());
+                    replaceFragment(new HomeFragment());
                     break;
             }
             return true;

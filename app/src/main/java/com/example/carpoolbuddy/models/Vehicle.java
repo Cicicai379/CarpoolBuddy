@@ -11,7 +11,9 @@ public class Vehicle implements Serializable {
     private int capacity;
     private String vehicleID;
     private ArrayList<String> ridersUIDs;
-    private boolean open;
+    private boolean open=true;
+    private boolean end=false;
+
     private String vehicleType;
     private double price;
     private CTime time;
@@ -21,6 +23,7 @@ public class Vehicle implements Serializable {
 
     public Vehicle() {
     }
+
 
     public Vehicle(String id, User owner, int capacity, double price, String type, CLocation p, CLocation d, CTime time) {
         this.vehicleID = id;
@@ -69,9 +72,18 @@ public class Vehicle implements Serializable {
         return model;
     }
 
+    public boolean isEnd() {
+        return end;
+    }
+
     public String getContact() {
         return contact;
     }
+
+    public void setEnd(boolean end) {
+        this.end = end;
+    }
+
 
     public String getVehicleID() {
         return vehicleID;
@@ -128,4 +140,5 @@ public class Vehicle implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+
 }

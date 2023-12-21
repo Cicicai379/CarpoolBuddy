@@ -90,19 +90,19 @@ public class ExploreFragment extends Fragment {
     private void openCarsActivity() {
         Intent intent = new Intent(getActivity(), CarsActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
     private void openBikesActivity() {
         Intent intent = new Intent(getActivity(), BikesActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }private void openHelicoptersActivity() {
         Intent intent = new Intent(getActivity(), HelicoptersActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }private void openSegwaysActivity() {
         Intent intent = new Intent(getActivity(), SegwaysActivity.class);
         startActivity(intent);
-        getActivity().finish();
+//        getActivity().finish();
     }
 }

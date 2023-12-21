@@ -34,71 +34,63 @@
                 android:layout_height="77dp"
                 android:layout_marginStart="312dp"
                 android:layout_marginTop="660dp"
+                android:elevation="15dp"
                 android:src="@drawable/add_shadow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView17"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginStart="34dp"
-                android:layout_marginBottom="420dp"
-                android:backgroundTint="#F69292"
-                android:src="@drawable/rectangle"
-                android:tint="#E4E4E4"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView21"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="170dp"
-                android:layout_marginEnd="34dp"
-                android:backgroundTint="#F69292"
-                android:src="@drawable/rectangle"
-                android:tint="#E4E4E4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="341dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="104dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Share the Ride, Multiply the Joy!"
-                android:textSize="20sp"
+            <Button
+                android:id="@+id/mytrips"
+                android:layout_width="109dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="103dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:onClick="SignUp"
+                android:padding="8dp"
+                android:text="my trips"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:backgroundTint="#4ecca3"
+                app:cornerRadius="28dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#4ecca3"
+                app:strokeWidth="4dp" />
 
-            <ImageView
-                android:id="@+id/imageView29"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginTop="367dp"
-                android:layout_marginEnd="224dp"
-                android:backgroundTint="#F69292"
-                android:src="@drawable/rectangle"
-                android:tint="#E4E4E4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView28"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_marginStart="212dp"
-                android:layout_marginTop="367dp"
-                android:layout_marginEnd="34dp"
-                android:backgroundTint="#F69292"
-                android:src="@drawable/rectangle"
-                android:tint="#E4E4E4"
-                app:layout_constraintEnd_toEndOf="parent"
+            <Button
+                android:id="@+id/myvehicles"
+                android:layout_width="130dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="149dp"
+                android:layout_marginTop="103dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:onClick="SignUp"
+                android:padding="8dp"
+                android:text="my vehicles"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:backgroundTint="#4ecca3"
+                app:cornerRadius="28dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#4ecca3"
+                app:strokeWidth="4dp" />
+
+            <ScrollView
+                android:layout_width="410dp"
+                android:layout_height="612dp"
+                android:layout_marginTop="175dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

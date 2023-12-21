@@ -4,9 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,19 +23,14 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.R;
-import com.example.carpoolbuddy.controllers.AddVehicleActivity;
 import com.example.carpoolbuddy.controllers.MainActivity;
-import com.example.carpoolbuddy.models.CLocation;
-import com.example.carpoolbuddy.models.User;
 import com.example.carpoolbuddy.models.Vehicle;
-import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +49,7 @@ public class SegwaysActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        String userId = mAuth.getCurrentUser().getUid();
 
         CollectionReference carsCollectionRef = firestore.collection("vehicles").document("segways").collection("segways");
 
@@ -61,7 +59,7 @@ public class SegwaysActivity extends AppCompatActivity {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
-                    vehicles.add(vehicle);
+                    if(vehicle.isOpen() && !vehicle.getOwner().getUid().equals(userId)) vehicles.add(vehicle);
                 }
 
                 renderLayoutRows(vehicles);
@@ -141,8 +139,16 @@ public class SegwaysActivity extends AppCompatActivity {
     }
 
     public void back(View w){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//        finish();
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
 }
