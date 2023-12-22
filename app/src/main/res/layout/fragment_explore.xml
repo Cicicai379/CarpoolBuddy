@@ -29,9 +29,34 @@
             tools:layout_editor_absoluteY="0dp">
 
             <ImageView
+                android:id="@+id/imageView71"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="346dp"
+                android:layout_marginTop="348dp"
+                android:elevation="15dp"
+                android:rotation="180"
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="145dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="512dp"
+                android:layout_marginEnd="220dp"
+                android:elevation="10dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Capooling = reduced carbon emission "
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
                 android:id="@+id/imageView21"
-                android:layout_width="374dp"
-                android:layout_height="144dp"
+                android:layout_width="377dp"
+                android:layout_height="129dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="137dp"
                 android:src="@drawable/rectangle"
@@ -41,22 +66,11 @@
 
             <ImageView
                 android:id="@+id/imageView28"
-                android:layout_width="375dp"
-                android:layout_height="216dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="317dp"
-                android:src="@drawable/rectangle"
-                android:tint="#6DEEE7FA"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView29"
-                android:layout_width="372dp"
-                android:layout_height="167dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="568dp"
-                android:src="@drawable/rectangle"
+                android:layout_width="411dp"
+                android:layout_height="449dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="325dp"
+                android:src="@drawable/rectangle2"
                 android:tint="#6DEEE7FA"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,27 +88,30 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/textView29"
                 android:layout_width="341dp"
                 android:layout_height="41dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="300dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="344dp"
+                android:elevation="11dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="Daily Tips"
-                android:textSize="20sp"
+                android:text="Promotions"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView29"
-                android:layout_width="341dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="552dp"
+                android:id="@+id/textView56"
+                android:layout_width="114dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="708dp"
                 android:elevation="11dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Promotions"
-                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="Welcome to Carpool Buddy"
+                android:textColor="@color/t"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +132,9 @@
                 android:id="@+id/textView24"
                 android:layout_width="66dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="-1dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="3dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Segways"
                 android:textSize="14sp"
@@ -143,6 +162,7 @@
                 android:layout_width="96dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="9dp"
+                android:layout_marginEnd="2dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Helicopters"
                 android:textSize="14sp"
@@ -188,6 +208,83 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.118"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="34dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="332dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Tips"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.108"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="34dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="495dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Tips"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="41dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="65dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="all"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="41dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="115dp"
+                android:layout_marginTop="65dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="tips"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cars" />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="72dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="214dp"
+                android:layout_marginTop="65dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="activities"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.153"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cars" />
 
@@ -257,97 +354,74 @@
                 app:tint="@color/white" />
 
             <ImageView
-                android:id="@+id/imageView47"
-                android:layout_width="27dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/baseline_celebration_24"
-                android:tint="#8E8C8C"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView28" />
-
-            <ImageView
-                android:id="@+id/imageView51"
-                android:layout_width="27dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="136dp"
-                android:layout_marginTop="302dp"
-                android:src="@drawable/baseline_lightbulb_24"
-                android:tint="#8E8C8C"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView31"
-                android:layout_width="333dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="470dp"
-                android:layout_marginEnd="37dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="SDG Goal 11 · Sustainable Cities and Communities"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="310dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="492dp"
-                android:layout_marginEnd="60dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Carpooling = reduced carbon emission"
-                android:textColor="#807F7F"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
                 android:id="@+id/imageView72"
-                android:layout_width="344dp"
-                android:layout_height="124dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="338dp"
+                android:layout_width="167dp"
+                android:layout_height="186dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="336dp"
                 android:src="@drawable/rectangle2"
                 android:tint="#fd9d25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView75"
-                android:layout_width="342dp"
-                android:layout_height="118dp"
-                android:layout_marginStart="32dp"
+                android:id="@+id/imageView78"
+                android:layout_width="161dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="212dp"
+                android:layout_marginTop="540dp"
+                android:src="@drawable/rectangle2"
+                android:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView81"
+                android:layout_width="166dp"
+                android:layout_height="174dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="592dp"
                 android:src="@drawable/rectangle2"
-                android:tint="#EAEAEA"
+                android:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView75"
+                android:layout_width="165dp"
+                android:layout_height="192dp"
+                android:layout_marginStart="212dp"
+                android:layout_marginTop="336dp"
+                android:src="@drawable/rectangle2"
+                android:tint="#E6FFFA"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView74"
-                android:layout_width="164dp"
-                android:layout_height="109dp"
-                android:layout_marginTop="18dp"
+                android:layout_width="141dp"
+                android:layout_height="118dp"
+                android:layout_marginTop="66dp"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/sdg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintHorizontal_bias="0.151"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.47" />
+                app:layout_constraintVertical_bias="0.463" />
 
             <TextView
                 android:id="@+id/textView34"
-                android:layout_width="217dp"
-                android:layout_height="62dp"
-                android:layout_marginTop="604dp"
+                android:layout_width="119dp"
+                android:layout_height="92dp"
+                android:layout_marginTop="384dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/montserrat_extrabold"
                 android:text="20% OFF"
-                android:textSize="44sp"
+                android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.524"
+                app:layout_constraintHorizontal_bias="0.875"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -355,12 +429,196 @@
                 android:id="@+id/textView36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="136dp"
-                android:layout_marginTop="668dp"
+                android:layout_marginStart="248dp"
+                android:layout_marginTop="480dp"
+                android:elevation="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="for all students"
                 android:textColor="#6C6C91"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/cars2"
+                android:layout_width="65dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="280dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.136"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/cars11"
+                android:layout_width="40dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="552dp"
+                android:background="@drawable/rectangle"
+                android:elevation="1dp"
+                android:tint="#7D8FF6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.117"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/cars12"
+                android:layout_width="40dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="714dp"
+                android:background="@drawable/rectangle"
+                android:elevation="1dp"
+                android:tint="#7D8FF6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.607"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/cars8"
+                android:layout_width="65dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="280dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.136"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/cars9"
+                android:layout_width="98dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="280dp"
+                android:background="@drawable/rectangle"
+                android:elevation="8dp"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.216"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/imageView56"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="286dp"
+                android:elevation="15dp"
+                android:rotation="180"
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView58"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="172dp"
+                android:layout_marginTop="286dp"
+                android:elevation="15dp"
+                android:rotation="180"
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView69"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="294dp"
+                android:layout_marginTop="286dp"
+                android:elevation="15dp"
+                android:rotation="180"
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="164dp"
+                android:layout_height="78dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="502dp"
+                android:src="@drawable/rectangle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView29"
+                android:layout_width="140dp"
+                android:layout_height="141dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="376dp"
+                android:src="@drawable/rectangle2"
+                android:tint="#BE9BFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView70"
+                android:layout_width="20dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="162dp"
+                android:layout_marginTop="548dp"
+                android:src="@drawable/baseline_thumb_up_24"
+                android:tint="#A3A3A3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="20dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="342dp"
+                android:layout_marginTop="712dp"
+                android:src="@drawable/baseline_thumb_up_24"
+                android:tint="#A3A3A3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView79"
+                android:layout_width="115dp"
+                android:layout_height="121dp"
+                android:layout_marginStart="236dp"
+                android:layout_marginTop="566dp"
+                android:elevation="5dp"
+                android:src="@drawable/sdg2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView80"
+                android:layout_width="139dp"
+                android:layout_height="152dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginTop="552dp"
+                android:src="@drawable/rectangle2"
+                android:tint="#bf8c2e"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView82"
+                android:layout_width="106dp"
+                android:layout_height="92dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="612dp"
+                android:src="@drawable/official"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

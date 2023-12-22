@@ -7,11 +7,23 @@
     tools:context=".controllers.profile.HelpActivity">
 
     <TextView
+        android:id="@+id/tt"
+        android:layout_width="341dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="144dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Q and A"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView16"
         android:layout_width="245dp"
         android:layout_height="49dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="94dp"
         android:fontFamily="@font/montserrat_extrabold"
         android:text="Help"
         android:textSize="34sp"
@@ -19,14 +31,98 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView17"
-        android:layout_width="341dp"
-        android:layout_height="41dp"
+        android:id="@+id/textView"
+        android:layout_width="299dp"
+        android:layout_height="26dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="192dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="1. How could I pay the vehicle rider?"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView60"
+        android:layout_width="305dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="600dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="4. Your app looks very interesting! I want to contribute!"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="304dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="648dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="All topics"
-        android:textSize="20sp"
+        android:text="If you are interested in joining us, please email telepathicai7@gmail.com! You can also email us for further questions!"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="304dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="508dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="If you used your school google account or signed up with a school email, you will automatically get the discount!"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="304dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="216dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="It's really up to you and your ride owner! We recommend you contacting your ride owner to confirm payment methods beforehand."
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="305dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="304dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="2. I want to post a vehicle. How should I decide the price?"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView57"
+        android:layout_width="304dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="348dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Theoretically, you could set any price you want. However, we would check for unrealistic price levels and contact you if anything inappropriate occurs."
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView58"
+        android:layout_width="305dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="464dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="3. I am a student, how can I verify for discounts?"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,17 +140,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/back" />
-
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="651dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="194dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

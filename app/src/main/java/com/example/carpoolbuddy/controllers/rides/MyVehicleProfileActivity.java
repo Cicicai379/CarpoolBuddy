@@ -75,7 +75,6 @@ public class MyVehicleProfileActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         nameField = findViewById(R.id.vehicle_name4);
-        phoneField = findViewById(R.id.vehicle_phone4);
         priceField = findViewById(R.id.vehicle_price4);
         plField = findViewById(R.id.pl4);
         dlField = findViewById(R.id.dl4);
@@ -106,8 +105,7 @@ public class MyVehicleProfileActivity extends AppCompatActivity {
                 if (document.exists()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
                     if (vehicle != null) {
-                        nameField.setText(vehicle.getOwner().getName());
-                        phoneField.setText(vehicle.getOwner().getPhone());
+                        nameField.setText(vehicle.getVehicleType());
                         hField.setText(vehicle.getTime().getHour() + ":" + vehicle.getTime().getMinute());
                         dField.setText(vehicle.getTime().getDay() + "/" + vehicle.getTime().getMonth() + "/" + vehicle.getTime().getYear());
                         plField.setText(vehicle.getPickUpLocation().getAddress());

@@ -67,6 +67,9 @@
             android:name=".controllers.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".controllers.profile.HelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".controllers.explore.CarsActivity"
             android:exported="false" />
         <activity

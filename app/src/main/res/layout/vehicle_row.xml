@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Taikoo to Chinese International School"
             android:textSize="18sp" />

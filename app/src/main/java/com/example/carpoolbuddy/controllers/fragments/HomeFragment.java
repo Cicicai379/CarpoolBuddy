@@ -130,7 +130,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
          placesClient = Places.createClient(view.getContext());
         fusedClient = LocationServices.getFusedLocationProviderClient(requireContext());
         getLocation();
-        getVehicleObjectsFromFirestore();
+        getCarObjectsFromFirestore();
+        getBikeObjectsFromFirestore();
+        getHelicopterObjectsFromFirestore();
+        getSegwayObjectsFromFirestore();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -245,7 +248,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -278,8 +280,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
-
-    private void getVehicleObjectsFromFirestore() {
+    private void getCarObjectsFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(requireContext());
         progressDialog.setMessage("Loading...");
@@ -294,8 +295,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String documentId = document.getId();
                             String placeId = document.getString("pickUpLocation.placeId");
-//                            String placeName = document.getString("pickUpLocation.address");
-//                            System.out.println(document.getId());
                             getLatLngFromPlaceId(placeId,document);
                         }
                         progressDialog.dismiss(); // Dismiss the progress dialog
@@ -304,8 +303,57 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     }
                 });
     }
-
-
+    private void getBikeObjectsFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("vehicles")
+                .document("bikes")
+                .collection("bikes")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String placeId = document.getString("pickUpLocation.placeId");
+                            getLatLngFromPlaceId(placeId,document);
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void getSegwayObjectsFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("vehicles")
+                .document("segways")
+                .collection("segways")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String placeId = document.getString("pickUpLocation.placeId");
+                            getLatLngFromPlaceId(placeId,document);
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void getHelicopterObjectsFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("vehicles")
+                .document("helicopters")
+                .collection("helicopters")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String placeId = document.getString("pickUpLocation.placeId");
+                            getLatLngFromPlaceId(placeId,document);
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void getLatLngFromPlaceId(String placeId, QueryDocumentSnapshot document) {
         List<Place.Field> placeFields = Collections.singletonList(Place.Field.LAT_LNG);
@@ -317,10 +365,25 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 LatLng latLng = place.getLatLng();
                 if (latLng != null) {
                     Drawable pngDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.car_marker);
+                    if(document.getString("vehicleType").equals("Helicopter")){
+                        pngDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.helicopter_marker);
+                    }else if (document.getString("vehicleType").equals("Bike")){
+                        pngDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.bike_marker);
+                    }else if (document.getString("vehicleType").equals("Segway")){
+                        pngDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.segway_marker);
+                    }
                     int markerSize = (int) (pngDrawable.getIntrinsicWidth() * 0.25);
+                    if (document.getString("vehicleType").equals("Bike")){
+                        markerSize = (int) (pngDrawable.getIntrinsicWidth() * 0.08);
+                    }else if (document.getString("vehicleType").equals("Helicopter")){
+                        markerSize = (int) (pngDrawable.getIntrinsicWidth() * 0.2);
+                    }else if (document.getString("vehicleType").equals("Segway")){
+                        markerSize = (int) (pngDrawable.getIntrinsicWidth() * 0.15);
+                    }
                     Bitmap bitmap = Bitmap.createBitmap(markerSize, markerSize, Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(bitmap);
                     pngDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+
                     pngDrawable.draw(canvas);
                     float rotationDegree = getRandomRotationDegree();
                     BitmapDescriptor markerIcon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -330,40 +393,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                             .title(place.getName())
                             .rotation(rotationDegree)
                             .icon(markerIcon);
+                    if (document.getString("vehicleType").equals("Bike")){
+                        markerOptions.rotation(0);
+                    }else if (document.getString("vehicleType").equals("Segway")){
+                        markerOptions.rotation(0);
+                    }
+
                     Marker newMarker =  gMap.addMarker(markerOptions);
                     newMarker.setTitle(document.getString("pickUpLocation.address") + " to " + document.getString("dropOffLocation.address"));
                     newMarker.setSnippet("Departure time: "+document.getLong("time.hour") +":"+document.getLong("time.minute")+" "+document.getLong("time.day")+"/"
-                                            +document.getLong("time.month"));
+                            +document.getLong("time.month"));
                     newMarker.setTag(document);
-//                    gMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-//                        @Override
-//                        public View getInfoWindow(Marker marker) {
-//                            return null;
-//                        }
-//
-//                        @SuppressLint("SetTextI18n")
-//                        @Override
-//                        public View getInfoContents(Marker marker) {
-//                            // Inflate a custom layout for the info window
-//                            View infoWindowView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
-//                            TextView titleTextView = infoWindowView.findViewById(R.id.titleTextView);
-//                            TextView timeTextView = infoWindowView.findViewById(R.id.timeTextView);
-//                            TextView details = infoWindowView.findViewById(R.id.details);
-//                            System.out.println(document.getId()); // the id is wrong here (all same id)
-//
-//                            titleTextView.setText(document.getId());
-////                            titleTextView.setText(document.getString("pickUpLocation.address") + " to " + document.getString("dropOffLocation.address"));
-//                            timeTextView.setText(document.getLong("time.hour") +":"+document.getLong("time.minute")+" "+document.getLong("time.day")+"/"
-//                                            +document.getLong("time.month"));
-//                            details.setOnClickListener(TextView -> {
-//                                Intent intent = new Intent(requireContext(), VehicleProfileActivity.class);
-//                                intent.putExtra("vehicleId", document.getId());
-//                                intent.putExtra("type", "Car");
-//                                startActivity(intent);
-//                            });
-//                            return infoWindowView;
-//                        }
-//                    });
 
                 }
             } else {
@@ -375,8 +415,5 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private float getRandomRotationDegree() {
         return new Random().nextFloat() * 360;
     }
-
-
-
 
 }

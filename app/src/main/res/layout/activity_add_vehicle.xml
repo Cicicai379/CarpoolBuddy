@@ -125,29 +125,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-
-        android:id="@+id/pLocation"
-        android:layout_width="234dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="492dp"
-        android:backgroundTint="#FAF5F5"
-        android:elevation="9dp"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="Pick up location"
-        android:inputType="textPostalAddress"
-        android:outlineProvider="none"
-        android:textColor="@color/black"
-        android:textColorHint="#BCBABA"
-        app:boxCornerRadiusBottomEnd="5dp"
-        app:boxCornerRadiusBottomStart="5dp"
-        app:boxCornerRadiusTopEnd="5dp"
-        app:boxCornerRadiusTopStart="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/autocomplete_fragment"
         android:name="com.example.carpoolbuddy.controllers.adapters.ThemedAutocompleteSupportFragment"
@@ -167,28 +144,6 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="572dp"
         android:elevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/dLocation"
-        android:layout_width="286dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="564dp"
-        android:backgroundTint="#FAF5F5"
-        android:elevation="9dp"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="Drop off location"
-        android:inputType="textPostalAddress"
-        android:outlineProvider="none"
-        android:textColor="@color/black"
-        android:textColorHint="#BCBABA"
-        app:boxCornerRadiusBottomEnd="5dp"
-        app:boxCornerRadiusBottomStart="5dp"
-        app:boxCornerRadiusTopEnd="5dp"
-        app:boxCornerRadiusTopStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -342,6 +297,34 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="176dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="580dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Drop off location"
+        android:textColor="#BCBABA"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="176dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="508dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Pick up location"
+        android:textColor="#BCBABA"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -21,6 +21,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/type4"
+        android:layout_width="119dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="262dp"
+        android:layout_marginTop="560dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="1/1/2023"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/hour4"
         android:layout_width="321dp"
         android:layout_height="35dp"
@@ -80,7 +94,7 @@
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rectangle_grey" />
 
@@ -107,7 +121,21 @@
         android:layout_marginTop="456dp"
         android:elevation="5dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="departure time"
+        android:text="Departure time"
+        android:textColor="#8C8A8A"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="160dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="544dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Vehicle type"
         android:textColor="#8C8A8A"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +164,7 @@
     <TextView
         android:id="@+id/pl4"
         android:layout_width="321dp"
-        android:layout_height="35dp"
+        android:layout_height="43dp"
         android:layout_marginStart="61dp"
         android:layout_marginTop="325dp"
         android:fontFamily="@font/montserrat_medium"
@@ -177,6 +205,17 @@
 
     <ImageView
         android:id="@+id/imageView62"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="562dp"
+        android:tint="@color/t"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_star_24" />
+
+    <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginStart="232dp"
@@ -275,7 +314,7 @@
         android:layout_marginStart="62dp"
         android:layout_marginTop="544dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="owner"
+        android:text="Owner"
         android:textColor="#8C8A8A"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"

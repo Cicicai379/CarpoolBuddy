@@ -52,6 +52,8 @@ public class MyTripProfileActivity extends AppCompatActivity {
     private String type;
     private TextView dField;
     private TextView caField;
+    private TextView typeField;
+
 
     private FirebaseAuth mAuth;
     private int c;
@@ -82,6 +84,7 @@ public class MyTripProfileActivity extends AppCompatActivity {
         dlField = findViewById(R.id.dl4);
         hField = findViewById(R.id.hour4);
         dField = findViewById(R.id.date4);
+        typeField = findViewById(R.id.type4);
 
         String userId = mAuth.getCurrentUser().getUid();
         String path = "reservations/"+userId+"/"+userId;
@@ -102,6 +105,8 @@ public class MyTripProfileActivity extends AppCompatActivity {
                         caField.setText(vehicle.getCapacity() + " seats");
                         c = vehicle.getCapacity();
                         priceField.setText(Double.toString(vehicle.getPrice()) + " HKD");
+                        typeField.setText(vehicle.getVehicleType());
+
                         addImage(vehicle);
 
                     }

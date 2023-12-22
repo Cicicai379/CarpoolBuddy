@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
@@ -107,8 +108,6 @@ public class AddVehicleActivity extends AppCompatActivity {
         capacityField = findViewById(R.id.capacity);
         priceField = findViewById(R.id.price);
         timeField = (EditText) findViewById(R.id.time);
-        pLocation = (EditText) findViewById(R.id.pLocation);
-        dLocation = (EditText) findViewById(R.id.dLocation);
         typeField = findViewById(R.id.spinner2);
         Setup();
 
@@ -238,83 +237,105 @@ public class AddVehicleActivity extends AppCompatActivity {
 
 
     public void addNewVehicle(View v) {
-        price = Double.parseDouble(String.valueOf(priceField.getText()));
-        capacity = Integer.parseInt(String.valueOf(capacityField.getText()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure you want to open a new vehicle? You will not be able to edit it after you upload it.");
 
-        if (!formValid()) return;
-        type = "Car";
-        type = typeField.getSelectedItem().toString();
-
-        FirebaseUser curuser = mAuth.getCurrentUser();
-        String userId = curuser.getUid();
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Uploading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        System.out.println(userId);
-        DocumentReference userRef = firestore.collection("users").document(userId);
-        userRef.get().addOnSuccessListener(documentSnapshot -> {
-            System.out.println("getting user on success...");
-            if (documentSnapshot.exists()) {
-                user = documentSnapshot.toObject(User.class);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // User confirmed, proceed with adding the vehicle
+            String priceText = priceField.getText().toString().trim();
+            String capacityText = capacityField.getText().toString().trim();
+            if (priceText.isEmpty() || capacityText.isEmpty()) {
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                return;
             }
-            Vehicle vehicle = new Vehicle(UUID.randomUUID().toString(), user, capacity, price, type, pl, dl, time);
-            String imageName = vehicle.getVehicleID()+".png";
 
-            firestore.collection("users").document(userId).set(user);
+            price = Double.parseDouble(String.valueOf(priceField.getText()));
+            capacity = Integer.parseInt(String.valueOf(capacityField.getText()));
 
-            StorageReference imageRef = storageReference.child(imageName);
-            UploadTask uploadTask = imageRef.putFile(imageUri);
+            if (!formValid()) return;
+            type = "Car";
+            type = typeField.getSelectedItem().toString();
 
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                // Get the download URL of the uploaded image
-                imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    switch (type) {
-                        case "Car":
-                            firestore.collection("vehicles")
-                                    .document("cars")
-                                    .collection("cars")
-                                    .document(vehicle.getVehicleID())
-                                    .set(vehicle);
-                            break;
-                        case "Bike":
-                            firestore.collection("vehicles")
-                                    .document("bikes")
-                                    .collection("bikes")
-                                    .document(vehicle.getVehicleID())
-                                    .set(vehicle);
-                            break;
-                        case "Helicopter":
-                            firestore.collection("vehicles")
-                                    .document("helicopters")
-                                    .collection("helicopters")
-                                    .document(vehicle.getVehicleID())
-                                    .set(vehicle);
-                            break;
-                        case "Segway":
-                            firestore.collection("vehicles")
-                                    .document("segways")
-                                    .collection("segways")
-                                    .document(vehicle.getVehicleID())
-                                    .set(vehicle);
-                            break;
-                    }
+            FirebaseUser curuser = mAuth.getCurrentUser();
+            String userId = curuser.getUid();
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Uploading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-                    progressDialog.dismiss();
-                    Toast.makeText(AddVehicleActivity.this, "Upload successful!", Toast.LENGTH_SHORT).show();
-                    new Handler().postDelayed(() -> back(null), 2000);
+            System.out.println(userId);
+            DocumentReference userRef = firestore.collection("users").document(userId);
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                System.out.println("getting user on success...");
+                if (documentSnapshot.exists()) {
+                    user = documentSnapshot.toObject(User.class);
+                }
+                Vehicle vehicle = new Vehicle(UUID.randomUUID().toString(), user, capacity, price, type, pl, dl, time);
+                String imageName = vehicle.getVehicleID()+".png";
+
+                firestore.collection("users").document(userId).set(user);
+
+                StorageReference imageRef = storageReference.child(imageName);
+                UploadTask uploadTask = imageRef.putFile(imageUri);
+
+                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                    // Get the download URL of the uploaded image
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        switch (type) {
+                            case "Car":
+                                firestore.collection("vehicles")
+                                        .document("cars")
+                                        .collection("cars")
+                                        .document(vehicle.getVehicleID())
+                                        .set(vehicle);
+                                break;
+                            case "Bike":
+                                firestore.collection("vehicles")
+                                        .document("bikes")
+                                        .collection("bikes")
+                                        .document(vehicle.getVehicleID())
+                                        .set(vehicle);
+                                break;
+                            case "Helicopter":
+                                firestore.collection("vehicles")
+                                        .document("helicopters")
+                                        .collection("helicopters")
+                                        .document(vehicle.getVehicleID())
+                                        .set(vehicle);
+                                break;
+                            case "Segway":
+                                firestore.collection("vehicles")
+                                        .document("segways")
+                                        .collection("segways")
+                                        .document(vehicle.getVehicleID())
+                                        .set(vehicle);
+                                break;
+                        }
+
+                        progressDialog.dismiss();
+                        Toast.makeText(AddVehicleActivity.this, "Upload successful!", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(() -> back(null), 2000);
+                    }).addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(AddVehicleActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    });
+
                 }).addOnFailureListener(e -> {
+
                     progressDialog.dismiss();
-                    Toast.makeText(AddVehicleActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddVehicleActivity.this, "Image upload failed!", Toast.LENGTH_SHORT).show();
                 });
-
-            }).addOnFailureListener(e -> {
-
-                progressDialog.dismiss();
-                Toast.makeText(AddVehicleActivity.this, "Image upload failed!", Toast.LENGTH_SHORT).show();
             });
+
         });
+
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // User canceled, do nothing or perform any desired action
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
@@ -322,8 +343,7 @@ public class AddVehicleActivity extends AppCompatActivity {
 
     private boolean formValid() {
         if (dl == null || pl == null || time == null || capacity == 0 || price == 0) {
-
-            System.out.println(dl.getAddress() + " 11");
+//            System.out.println(dl.getAddress() + " 11");
             Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
             return false;
         }

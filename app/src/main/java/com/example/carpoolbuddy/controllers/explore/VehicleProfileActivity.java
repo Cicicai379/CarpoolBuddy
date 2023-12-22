@@ -60,6 +60,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
     private TextView phoneField;
     private TextView priceField;
     private TextView hField;
+    private TextView typeField;
     private String type;
     private TextView dField;
     private Spinner spinner;
@@ -91,6 +92,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
         dlField = findViewById(R.id.dl);
         hField = findViewById(R.id.hour);
         dField = findViewById(R.id.date);
+        typeField = findViewById(R.id.type2);
 
         String path = "vehicles/cars/cars";
         switch (type) {
@@ -122,6 +124,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
                         plField.setText(vehicle.getPickUpLocation().getAddress());
                         dlField.setText(vehicle.getDropOffLocation().getAddress());
                         priceField.setText(Double.toString(vehicle.getPrice()) + " HKD");
+                        typeField.setText(vehicle.getVehicleType());
+
                         addImage(vehicle);
 
                         // Set the spinner items to numbers from 1 to the vehicle's capacity
