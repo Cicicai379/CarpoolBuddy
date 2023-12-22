@@ -136,18 +136,14 @@ public class RidesFragment extends Fragment {
         CollectionReference carsCollectionRef = firestore.collection("vehicles").document("cars").collection("cars");
         carsCollectionRef.get().addOnCompleteListener(task -> {
             progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
-
             if (task.isSuccessful()) {
                 List<Vehicle> vehicles = new ArrayList<>();
-
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
-
                     if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
                         vehicles.add(vehicle);
                     }
                 }
-
                 renderLayoutRows(view, vehicles,false);
             } else {
                 Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -156,18 +152,14 @@ public class RidesFragment extends Fragment {
         CollectionReference b = firestore.collection("vehicles").document("bikes").collection("bikes");
         b.get().addOnCompleteListener(task -> {
             progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
-
             if (task.isSuccessful()) {
                 List<Vehicle> vehicles = new ArrayList<>();
-
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
-
                     if (vehicle.getOwner().getUid().equals(userId) && !vehicle.isEnd()) {
                         vehicles.add(vehicle);
                     }
                 }
-
                 renderLayoutRows(view, vehicles,false);
             } else {
                 Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -196,7 +188,6 @@ public class RidesFragment extends Fragment {
         CollectionReference s = firestore.collection("vehicles").document("segways").collection("segways");
         s.get().addOnCompleteListener(task -> {
             progressDialog.dismiss(); // Dismiss the progress dialog after data retrieval
-
             if (task.isSuccessful()) {
                 List<Vehicle> vehicles = new ArrayList<>();
 
@@ -207,7 +198,6 @@ public class RidesFragment extends Fragment {
                         vehicles.add(vehicle);
                     }
                 }
-
                 renderLayoutRows(view, vehicles,false);
             } else {
                 Toast.makeText(view.getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();

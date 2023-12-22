@@ -28,13 +28,21 @@ import com.example.carpoolbuddy.controllers.AuthActivity;
 import com.example.carpoolbuddy.controllers.profile.EditProfileActivity;
 import com.example.carpoolbuddy.controllers.profile.HelpActivity;
 import com.example.carpoolbuddy.controllers.profile.MessageMainActivity;
+import com.example.carpoolbuddy.controllers.rides.AddVehicleActivity;
 import com.example.carpoolbuddy.models.User;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
@@ -63,7 +71,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Button logoutButton = view.findViewById(R.id.logout);
+        ImageView logoutButton = view.findViewById(R.id.logout);
         logoutButton.setOnClickListener(v -> logout());
 
         TextView editButton = view.findViewById(R.id.edit);
@@ -119,6 +127,9 @@ public class ProfileFragment extends Fragment {
             TextView nameTextView = view.findViewById(R.id.name);
             TextView emailTextView = view.findViewById(R.id.email);
             TextView phoneTextView = view.findViewById(R.id.vehicle_phone);
+            TextView ridesTextView = view.findViewById(R.id.rides_num);
+            TextView tripsTextView = view.findViewById(R.id.trips_num);
+
             ImageView profileImageView = view.findViewById(R.id.circleImageView);
 
             ProgressDialog progressDialog = new ProgressDialog(requireContext());
@@ -179,6 +190,40 @@ public class ProfileFragment extends Fragment {
                     progressDialog.dismiss();
                 }
             });
+            CollectionReference reservationsCollectionRef = firestore.collection("reservations").document(userId).collection(userId);
+            reservationsCollectionRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    int numberOfRecords = task.getResult().size();
+                    tripsTextView.setText(numberOfRecords+"");
+                } else {
+                    Toast.makeText(view.getContext(), "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+            CollectionReference carsCollectionRef = firestore.collection("vehicles").document("cars").collection("cars");
+            CollectionReference bikesCollectionRef = firestore.collection("vehicles").document("bikes").collection("bikes");
+            CollectionReference helicoptersCollectionRef = firestore.collection("vehicles").document("helicopters").collection("helicopters");
+            CollectionReference segwaysCollectionRef = firestore.collection("vehicles").document("segways").collection("segways");
+
+            List<Task<QuerySnapshot>> tasks = new ArrayList<>();
+            tasks.add(carsCollectionRef.get());
+            tasks.add(bikesCollectionRef.get());
+            tasks.add(helicoptersCollectionRef.get());
+            tasks.add(segwaysCollectionRef.get());
+
+            Task<List<QuerySnapshot>> combinedTask = Tasks.whenAllSuccess(tasks);
+            combinedTask.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    int totalReservations = 0;
+                    for (QuerySnapshot querySnapshot : task.getResult()) {
+                        totalReservations += querySnapshot.size();
+                    }
+                    ridesTextView.setText(totalReservations+"");
+                } else {
+                    Toast.makeText(view.getContext(), "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
         }
     }
 }
