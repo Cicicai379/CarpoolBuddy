@@ -3,8 +3,14 @@ package com.example.carpoolbuddy.controllers.fragments;
 import static androidx.core.location.LocationManagerCompat.getCurrentLocation;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +31,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.explore.CarsActivity;
+import com.example.carpoolbuddy.controllers.explore.VehicleProfileActivity;
+import com.example.carpoolbuddy.models.Vehicle;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -32,6 +42,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -39,12 +50,63 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.FetchPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
+
+
+    class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private final View myContentsView;
+
+        MyInfoWindowAdapter(){
+            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            System.out.println("getInfoContents");
+
+            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.titleTextView));
+            tvTitle.setText(marker.getTitle());
+            TextView tvTime = ((TextView)myContentsView.findViewById(R.id.timeTextView));
+            tvTime.setText(marker.getSnippet());
+            DocumentSnapshot document = (DocumentSnapshot) marker.getTag();
+            tvTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("onclick window");
+                    Intent intent = new Intent(requireContext(), VehicleProfileActivity.class);
+                    intent.putExtra("type", document.getString("vehicleType"));
+                    intent.putExtra("vehicleId", document.getString("vehicleID"));
+                    startActivity(intent);
+                }
+            });
+            return myContentsView;
+        }
+        @Override
+        public View getInfoWindow(Marker marker) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+    }
+
+    private ProgressDialog progressDialog;
 
     private FrameLayout map;
     private GoogleMap gMap;
@@ -53,6 +115,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private FusedLocationProviderClient fusedClient;
     private static final int REQUEST_CODE = 101;
     private SearchView searchView;
+    private PlacesClient placesClient;
 
     @Nullable
     @Override
@@ -63,10 +126,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         map = view.findViewById(R.id.map);
         searchView = view.findViewById(R.id.search);
         searchView.clearFocus();
-
+        Places.initialize(view.getContext(), "AIzaSyAZ4dtpOHzJAe0DZMwQQMxinVvpDGNj64c");
+         placesClient = Places.createClient(view.getContext());
         fusedClient = LocationServices.getFusedLocationProviderClient(requireContext());
         getLocation();
-
+        getVehicleObjectsFromFirestore();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -84,8 +148,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                             }
                             MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(loc);
                             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
                             gMap.animateCamera(cameraUpdate);
                             marker = gMap.addMarker(markerOptions);
                         }
@@ -101,7 +164,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 return false;
             }
         });
-
         return view;
     }
 
@@ -137,7 +199,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("My Current Location");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
         googleMap.addMarker(markerOptions);
         // Enable the user's current location on the map
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -146,6 +208,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             googleMap.getUiSettings().setMapToolbarEnabled(true);
             googleMap.getUiSettings().setRotateGesturesEnabled(true);
             googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
             // Get the view of the My Location button
             View locationButton = ((View) getView().findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
@@ -158,6 +221,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             layoutParams.height = desiredSize;
             locationButton.setLayoutParams(layoutParams);
 
+            googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(@NonNull Marker marker) {
+                    DocumentSnapshot document = (DocumentSnapshot) marker.getTag();
+                    System.out.println("onclick window");
+                    Intent intent = new Intent(requireContext(), VehicleProfileActivity.class);
+                    intent.putExtra("type", document.getString("vehicleType"));
+                    intent.putExtra("vehicleId", document.getString("vehicleID"));
+                    startActivity(intent);
+                }
+            });
 
         }
     }
@@ -203,5 +277,106 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
     }
+
+
+    private void getVehicleObjectsFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        db.collection("vehicles")
+                .document("cars")
+                .collection("cars")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String documentId = document.getId();
+                            String placeId = document.getString("pickUpLocation.placeId");
+//                            String placeName = document.getString("pickUpLocation.address");
+//                            System.out.println(document.getId());
+                            getLatLngFromPlaceId(placeId,document);
+                        }
+                        progressDialog.dismiss(); // Dismiss the progress dialog
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+
+    private void getLatLngFromPlaceId(String placeId, QueryDocumentSnapshot document) {
+        List<Place.Field> placeFields = Collections.singletonList(Place.Field.LAT_LNG);
+        FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields).build();
+        placesClient.fetchPlace(request).addOnCompleteListener((responseTask) -> {
+            if (responseTask.isSuccessful()) {
+                FetchPlaceResponse response = responseTask.getResult();
+                Place place = response.getPlace();
+                LatLng latLng = place.getLatLng();
+                if (latLng != null) {
+                    Drawable pngDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.car_marker);
+                    int markerSize = (int) (pngDrawable.getIntrinsicWidth() * 0.25);
+                    Bitmap bitmap = Bitmap.createBitmap(markerSize, markerSize, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    pngDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                    pngDrawable.draw(canvas);
+                    float rotationDegree = getRandomRotationDegree();
+                    BitmapDescriptor markerIcon = BitmapDescriptorFactory.fromBitmap(bitmap);
+
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(latLng)
+                            .title(place.getName())
+                            .rotation(rotationDegree)
+                            .icon(markerIcon);
+                    Marker newMarker =  gMap.addMarker(markerOptions);
+                    newMarker.setTitle(document.getString("pickUpLocation.address") + " to " + document.getString("dropOffLocation.address"));
+                    newMarker.setSnippet("Departure time: "+document.getLong("time.hour") +":"+document.getLong("time.minute")+" "+document.getLong("time.day")+"/"
+                                            +document.getLong("time.month"));
+                    newMarker.setTag(document);
+//                    gMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+//                        @Override
+//                        public View getInfoWindow(Marker marker) {
+//                            return null;
+//                        }
+//
+//                        @SuppressLint("SetTextI18n")
+//                        @Override
+//                        public View getInfoContents(Marker marker) {
+//                            // Inflate a custom layout for the info window
+//                            View infoWindowView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+//                            TextView titleTextView = infoWindowView.findViewById(R.id.titleTextView);
+//                            TextView timeTextView = infoWindowView.findViewById(R.id.timeTextView);
+//                            TextView details = infoWindowView.findViewById(R.id.details);
+//                            System.out.println(document.getId()); // the id is wrong here (all same id)
+//
+//                            titleTextView.setText(document.getId());
+////                            titleTextView.setText(document.getString("pickUpLocation.address") + " to " + document.getString("dropOffLocation.address"));
+//                            timeTextView.setText(document.getLong("time.hour") +":"+document.getLong("time.minute")+" "+document.getLong("time.day")+"/"
+//                                            +document.getLong("time.month"));
+//                            details.setOnClickListener(TextView -> {
+//                                Intent intent = new Intent(requireContext(), VehicleProfileActivity.class);
+//                                intent.putExtra("vehicleId", document.getId());
+//                                intent.putExtra("type", "Car");
+//                                startActivity(intent);
+//                            });
+//                            return infoWindowView;
+//                        }
+//                    });
+
+                }
+            } else {
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private float getRandomRotationDegree() {
+        return new Random().nextFloat() * 360;
+    }
+
+
+
 
 }

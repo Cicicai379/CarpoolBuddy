@@ -87,8 +87,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
         nameField = findViewById(R.id.vehicle_name);
         phoneField = findViewById(R.id.vehicle_phone);
         priceField = findViewById(R.id.vehicle_price);
-        plField = findViewById(R.id.dl);
-        dlField = findViewById(R.id.pl);
+        plField = findViewById(R.id.pl);
+        dlField = findViewById(R.id.dl);
         hField = findViewById(R.id.hour);
         dField = findViewById(R.id.date);
 

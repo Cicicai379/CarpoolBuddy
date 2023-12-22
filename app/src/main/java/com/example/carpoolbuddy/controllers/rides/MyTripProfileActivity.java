@@ -78,8 +78,8 @@ public class MyTripProfileActivity extends AppCompatActivity {
         nameField = findViewById(R.id.vehicle_name4);
         phoneField = findViewById(R.id.vehicle_phone4);
         priceField = findViewById(R.id.vehicle_price4);
-        plField = findViewById(R.id.dl4);
-        dlField = findViewById(R.id.pl4);
+        plField = findViewById(R.id.pl4);
+        dlField = findViewById(R.id.dl4);
         hField = findViewById(R.id.hour4);
         dField = findViewById(R.id.date4);
 

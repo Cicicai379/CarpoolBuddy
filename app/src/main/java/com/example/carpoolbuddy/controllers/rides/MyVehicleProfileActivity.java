@@ -77,8 +77,8 @@ public class MyVehicleProfileActivity extends AppCompatActivity {
         nameField = findViewById(R.id.vehicle_name4);
         phoneField = findViewById(R.id.vehicle_phone4);
         priceField = findViewById(R.id.vehicle_price4);
-        plField = findViewById(R.id.dl4);
-        dlField = findViewById(R.id.pl4);
+        plField = findViewById(R.id.pl4);
+        dlField = findViewById(R.id.dl4);
         hField = findViewById(R.id.hour4);
         dField = findViewById(R.id.date4);
         currentUsers = findViewById(R.id.current_users);
@@ -149,6 +149,7 @@ public class MyVehicleProfileActivity extends AppCompatActivity {
             TextView nameTextView = rowView.findViewById(R.id.cu_name2);
             TextView phoneTextView = rowView.findViewById(R.id.cu_phone);
             nameTextView.setText("No riders");
+            phoneTextView.setText("");
             currentUsers.addView(rowView);
             return;
         }
