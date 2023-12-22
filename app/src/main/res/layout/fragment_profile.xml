@@ -5,28 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".controllers.fragments.ProfileFragment">
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#7A61EC" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="180dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_extrabold"
-        android:text="Profile"
-        android:textSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="767dp">
 
+
+        <TextView
+            android:id="@+id/textView64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="406dp"
+            android:elevation="18dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Achievements"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView62"
@@ -38,7 +34,7 @@
             android:id="@+id/name"
             android:layout_width="173dp"
             android:layout_height="40dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="38dp"
             android:layout_marginTop="256dp"
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_bold"
@@ -62,7 +58,7 @@
             android:id="@+id/email"
             android:layout_width="235dp"
             android:layout_height="26dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="38dp"
             android:layout_marginTop="296dp"
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_medium"
@@ -80,7 +76,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:text="rides"
+            android:text="Rides"
             android:textColor="#808080"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +119,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:text="trips"
+            android:text="Trips"
             android:textColor="#808080"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +129,7 @@
             android:id="@+id/vehicle_phone"
             android:layout_width="181dp"
             android:layout_height="30dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="38dp"
             android:layout_marginTop="320dp"
             android:autoText="false"
             android:elevation="10dp"
@@ -148,7 +144,7 @@
             android:id="@+id/edit"
             android:layout_width="61dp"
             android:layout_height="29dp"
-            android:layout_marginStart="281dp"
+            android:layout_marginStart="292dp"
             android:layout_marginTop="594dp"
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_bold"
@@ -163,7 +159,7 @@
             android:id="@+id/help"
             android:layout_width="67dp"
             android:layout_height="38dp"
-            android:layout_marginStart="79dp"
+            android:layout_marginStart="67dp"
             android:layout_marginTop="594dp"
             android:layout_marginEnd="183dp"
             android:elevation="10dp"
@@ -180,8 +176,8 @@
             android:id="@+id/edit2"
             android:layout_width="30dp"
             android:layout_height="36dp"
-            android:layout_marginStart="295dp"
-            android:layout_marginTop="550dp"
+            android:layout_marginStart="307dp"
+            android:layout_marginTop="551dp"
             android:elevation="10dp"
             android:src="@drawable/baseline_edit_24"
             android:tint="#404040"
@@ -205,7 +201,7 @@
             android:id="@+id/help2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="83dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="554dp"
             android:elevation="10dp"
             android:src="@drawable/baseline_help_24"
@@ -217,7 +213,7 @@
             android:id="@+id/message"
             android:layout_width="138dp"
             android:layout_height="36dp"
-            android:layout_marginStart="162dp"
+            android:layout_marginStart="161dp"
             android:layout_marginTop="594dp"
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_bold"
@@ -306,9 +302,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="388dp"
             android:src="@drawable/rectangle2"
-            android:tint="@color/t"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/t" />
 
         <ImageView
             android:id="@+id/imageView87"
@@ -326,7 +322,7 @@
             android:id="@+id/cars3"
             android:layout_width="98dp"
             android:layout_height="103dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="-8dp"
             android:layout_marginTop="536dp"
             android:background="@drawable/rectangle2"
             android:elevation="2dp"
@@ -356,7 +352,7 @@
             android:id="@+id/cars5"
             android:layout_width="98dp"
             android:layout_height="103dp"
-            android:layout_marginStart="254dp"
+            android:layout_marginStart="268dp"
             android:layout_marginTop="536dp"
             android:background="@drawable/rectangle2"
             android:elevation="2dp"
@@ -366,24 +362,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rectangle" />
-
-        <TextView
-            android:id="@+id/textView64"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="403dp"
-            android:layout_marginEnd="191dp"
-            android:layout_marginBottom="404dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Achievements"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView65"
@@ -417,8 +395,8 @@
             android:id="@+id/imageView3"
             android:layout_width="23dp"
             android:layout_height="22dp"
-            android:layout_marginStart="190dp"
-            android:layout_marginTop="266dp"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="267dp"
             android:src="@drawable/baseline_stars_24"
             android:tint="#F8E481"
             app:layout_constraintStart_toStartOf="parent"

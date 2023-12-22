@@ -239,7 +239,7 @@ public class AddVehicleActivity extends AppCompatActivity {
     public void addNewVehicle(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
-        builder.setMessage("Are you sure you want to open a new vehicle? You will not be able to edit it after you upload it.");
+        builder.setMessage("Are you sure you want to open a new vehicle? You will not be able to edit your ride for your riders' info accuracy");
 
         builder.setPositiveButton("Yes", (dialog, which) -> {
             // User confirmed, proceed with adding the vehicle

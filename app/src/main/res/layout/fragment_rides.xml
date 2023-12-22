@@ -51,11 +51,11 @@
                 android:text="my trips"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:backgroundTint="#4ecca3"
+                app:backgroundTint="#64A2ED"
                 app:cornerRadius="28dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#4ecca3"
+                app:strokeColor="#64A2ED"
                 app:strokeWidth="4dp" />
 
             <Button
@@ -70,11 +70,11 @@
                 android:text="my vehicles"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:backgroundTint="#4ecca3"
+                app:backgroundTint="#F85D5D"
                 app:cornerRadius="28dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#4ecca3"
+                app:strokeColor="#F85D5D"
                 app:strokeWidth="4dp" />
 
             <ScrollView
