@@ -301,7 +301,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView49"
+        android:id="@+id/dText"
         android:layout_width="176dp"
         android:layout_height="45dp"
         android:layout_marginStart="72dp"
@@ -315,7 +315,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView51"
+        android:id="@+id/pText"
         android:layout_width="176dp"
         android:layout_height="45dp"
         android:layout_marginStart="72dp"

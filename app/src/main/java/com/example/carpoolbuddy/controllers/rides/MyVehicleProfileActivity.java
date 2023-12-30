@@ -251,4 +251,6 @@ public class MyVehicleProfileActivity extends AppCompatActivity {
         });
     }
 
+    public void deleteAndRate(View view) {
+    }
 }

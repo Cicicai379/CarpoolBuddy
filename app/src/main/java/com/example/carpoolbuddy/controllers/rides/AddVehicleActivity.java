@@ -71,13 +71,13 @@ public class AddVehicleActivity extends AppCompatActivity {
     private ImageView pickTimeBtn;
     private EditText selectedTimeTV;
     private Spinner typeField;
+    private TextView pText;
+    private TextView dText;
 
     private AutocompleteSupportFragment autocompleteFragment;
 
-    private String owner;
     private double price;
     private int capacity;
-    private String contact;
     private String type;
     private CLocation pl;
     private CLocation dl;
@@ -85,8 +85,7 @@ public class AddVehicleActivity extends AppCompatActivity {
     private CTime time;
 
 
-    private EditText pLocation;
-    private EditText dLocation;
+
 
 
     @Override
@@ -109,6 +108,8 @@ public class AddVehicleActivity extends AppCompatActivity {
         priceField = findViewById(R.id.price);
         timeField = (EditText) findViewById(R.id.time);
         typeField = findViewById(R.id.spinner2);
+        pText = findViewById(R.id.pText);
+        dText = findViewById(R.id.dText);
         Setup();
 
     }
@@ -141,9 +142,10 @@ public class AddVehicleActivity extends AppCompatActivity {
                 String address = place.getName();
                 String placeId = place.getId();
                 pl = new CLocation(address, placeId);
-                pLocation.setHint("");
                 CharSequence c = "        ";
                 autocompleteFragment.setText(c);
+                pText.setText("");
+
             }
 
             @Override
@@ -169,9 +171,9 @@ public class AddVehicleActivity extends AppCompatActivity {
                 String address = place.getName();
                 String placeId = place.getId();
                 dl = new CLocation(address, placeId);
-                dLocation.setHint("");
                 CharSequence c = "        ";
                 autocompleteFragment2.setText(c);
+                dText.setText("");
             }
             @Override
             public void onError(@NonNull Status status) {

@@ -45,9 +45,9 @@ public class CarsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cars);
 
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+        firestore = FirebaseFirestore.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
 
 
@@ -59,7 +59,7 @@ public class CarsActivity extends AppCompatActivity {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
-                    if(vehicle.isOpen() && !vehicle.getOwner().getUid().equals(userId)) vehicles.add(vehicle);
+                    if(vehicle.isOpen() && !vehicle.isEnd() && !vehicle.getOwner().getUid().equals(userId)) vehicles.add(vehicle);
                 }
 
                 renderLayoutRows(vehicles);
@@ -82,9 +82,14 @@ public class CarsActivity extends AppCompatActivity {
             TextView locationTextView = rowView.findViewById(R.id.location);
             TextView infoTextView = rowView.findViewById(R.id.info);
 
+            System.out.println(vehicle.getOwner().getUid());
+
+            firestore.collection("users").document(vehicle.getOwner().getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                float rating = documentSnapshot.getLong("rating").floatValue();
+                ownerTextView.setText(vehicle.getOwner().getName() + " | rating: " + rating);
+                    });
 
             locationTextView.setText(vehicle.getPickUpLocation().getAddress() + " to "+vehicle.getDropOffLocation().getAddress());
-            ownerTextView.setText(vehicle.getOwner().getName() + ": " + vehicle.getOwner().getRating());
             infoTextView.setText(vehicle.getPrice() + " HKD | " + vehicle.getTime().toString() + " | " + vehicle.getCapacity() + " seats");
 
             // Load the image using the vehicle ID

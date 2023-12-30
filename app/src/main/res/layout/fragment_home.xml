@@ -23,7 +23,7 @@
         android:layout_marginEnd="96dp"
         android:id="@+id/search"
         app:iconifiedByDefault="false"
-        app:queryHint="Search"
+        app:queryHint="Where are you?"
         android:focusable="false"
         app:closeIcon="@drawable/baseline_clear_24"
         app:searchIcon="@drawable/baseline_search_24"

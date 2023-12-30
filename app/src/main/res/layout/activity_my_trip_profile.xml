@@ -294,7 +294,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/instruction"
         android:layout_width="391dp"
         android:layout_height="23dp"
         android:layout_marginStart="26dp"
@@ -344,7 +344,7 @@
         app:srcCompat="@drawable/rectangle_grey" />
 
     <Button
-        android:id="@+id/close2"
+        android:id="@+id/button"
         android:layout_width="288dp"
         android:layout_height="64dp"
         android:layout_marginStart="62dp"

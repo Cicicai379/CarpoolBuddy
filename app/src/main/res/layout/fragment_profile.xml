@@ -83,6 +83,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/rating"
+            android:layout_width="42dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="178dp"
+            android:layout_marginTop="207dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:text=" 3.0"
+            android:textColor="#808080"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/rides_num"
             android:layout_width="47dp"
             android:layout_height="27dp"
@@ -241,8 +256,8 @@
             app:layout_constraintVertical_bias="0.2">
 
             <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp">
+                android:layout_width="110dp"
+                android:layout_height="120dp">
 
                 <ImageView
                     android:id="@+id/circleImageView3"
@@ -349,6 +364,21 @@
             app:srcCompat="@drawable/rectangle" />
 
         <ImageView
+            android:id="@+id/cars6"
+            android:layout_width="66dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="119dp"
+            android:layout_marginTop="206dp"
+            android:background="@drawable/rectangle2"
+            android:elevation="2dp"
+            android:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.27"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
+
+        <ImageView
             android:id="@+id/cars5"
             android:layout_width="98dp"
             android:layout_height="103dp"
@@ -395,8 +425,9 @@
             android:id="@+id/imageView3"
             android:layout_width="23dp"
             android:layout_height="22dp"
-            android:layout_marginStart="192dp"
-            android:layout_marginTop="267dp"
+            android:layout_marginStart="216dp"
+            android:layout_marginTop="210dp"
+            android:elevation="15dp"
             android:src="@drawable/baseline_stars_24"
             android:tint="#F8E481"
             app:layout_constraintStart_toStartOf="parent"

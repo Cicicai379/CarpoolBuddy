@@ -1,5 +1,6 @@
 package com.example.carpoolbuddy.controllers.fragments;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import static androidx.core.location.LocationManagerCompat.getCurrentLocation;
 
 import android.Manifest;
@@ -10,11 +11,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +35,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.carpoolbuddy.R;
+import com.example.carpoolbuddy.controllers.MainActivity;
 import com.example.carpoolbuddy.controllers.explore.CarsActivity;
 import com.example.carpoolbuddy.controllers.explore.VehicleProfileActivity;
 import com.example.carpoolbuddy.models.Vehicle;
@@ -47,9 +52,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
@@ -58,25 +66,45 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.model.DirectionsLeg;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
+import com.google.maps.model.EncodedPolyline;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import com.google.maps.GeoApiContext;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
+    private Marker selectedMarker; private Marker additionalMarker;
 
+    private Polyline routePolyline;
 
     class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         private final View myContentsView;
-
         MyInfoWindowAdapter(){
             myContentsView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
         }
-
         @Override
         public View getInfoContents(Marker marker) {
             System.out.println("getInfoContents");
@@ -233,6 +261,140 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     intent.putExtra("type", document.getString("vehicleType"));
                     intent.putExtra("vehicleId", document.getString("vehicleID"));
                     startActivity(intent);
+                }
+
+
+            });
+
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    // Check if a different marker is selected
+                    if (selectedMarker != null && !selectedMarker.equals(marker)) {
+                        // Remove the polyline from the map
+                        if (routePolyline != null) {
+                            routePolyline.remove();
+                            routePolyline = null;
+                        }
+
+                        // Remove the additional marker from the map
+                        if (additionalMarker != null) {
+                            additionalMarker.remove();
+                            additionalMarker = null;
+                        }
+                    }
+
+                    DocumentSnapshot document = (DocumentSnapshot) marker.getTag();
+                    if (document != null) {
+
+                        String pickupPlaceId = document.getString("pickUpLocation.placeId");
+                        String dropOffPlaceId = document.getString("dropOffLocation.placeId");
+
+                        getLatLngFromPlaceId(pickupPlaceId, new OnLatLngFetchedListener() {
+                            @Override
+                            public void onLatLngFetched(LatLng pickUpLatLng) {
+                                getLatLngFromPlaceId(dropOffPlaceId, new OnLatLngFetchedListener() {
+                                    @Override
+                                    public void onLatLngFetched(LatLng dropOffLatLng) {
+                                        String p = pickUpLatLng.toString().substring(10, pickUpLatLng.toString().length() - 1);
+                                        String d = dropOffLatLng.toString().substring(10, dropOffLatLng.toString().length() - 1);
+                                        List<LatLng> path = new ArrayList();
+                                        GeoApiContext context = new GeoApiContext.Builder()
+                                                .apiKey("AIzaSyBz4uNZFtWyVRm143jW3Fu-kV-UYXNTTOY")
+                                                .build();
+                                        System.out.println("p:"+p);
+                                        System.out.println("d:"+d);
+
+                                        DirectionsApiRequest req = DirectionsApi.getDirections(context, p, d);
+                                        try {
+                                            System.out.println("trying");
+
+                                            DirectionsResult res = req.await();
+                                            if (res.routes != null && res.routes.length > 0) {
+                                                System.out.println("res.routes != null");
+
+                                                DirectionsRoute route = res.routes[0];
+                                                if (route.legs !=null) {
+                                                    for(int i=0; i<route.legs.length; i++) {
+                                                        DirectionsLeg leg = route.legs[i];
+                                                        if (leg.steps != null) {
+                                                            for (int j=0; j<leg.steps.length;j++){
+                                                                DirectionsStep step = leg.steps[j];
+                                                                if (step.steps != null && step.steps.length >0) {
+                                                                    for (int k=0; k<step.steps.length;k++){
+                                                                        DirectionsStep step1 = step.steps[k];
+                                                                        EncodedPolyline points1 = step1.polyline;
+                                                                        if (points1 != null) {
+                                                                            System.out.println("points1 != null");
+
+                                                                            List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
+                                                                            for (com.google.maps.model.LatLng coord1 : coords1) {
+                                                                                path.add(new LatLng(coord1.lat, coord1.lng));
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    System.out.println("else");
+
+                                                                    EncodedPolyline points = step.polyline;
+                                                                    if (points != null) {
+                                                                        System.out.println("points != null");
+
+                                                                        List<com.google.maps.model.LatLng> coords = points.decodePath();
+                                                                        for (com.google.maps.model.LatLng coord : coords) {
+                                                                            path.add(new LatLng(coord.lat, coord.lng));
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } catch(Exception ex) {
+                                            System.out.println("exception");
+                                            System.out.println(ex.getLocalizedMessage());
+
+                                            Log.e(TAG, ex.getLocalizedMessage());
+                                        }
+                                        if (path.size() > 0) {
+                                            if (routePolyline != null) {
+                                                routePolyline.remove();
+                                            }
+                                            PolylineOptions opts = new PolylineOptions().addAll(path).color(0xFF9362D9).width(13);
+                                            routePolyline = googleMap.addPolyline(opts);
+                                        }
+                                        if (additionalMarker != null) {
+                                            additionalMarker.remove();
+                                        }
+                                        additionalMarker = googleMap.addMarker(new MarkerOptions().position(dropOffLatLng));
+                                        googleMap.getUiSettings().setZoomControlsEnabled(true);
+                                        double latitude1 = pickUpLatLng.latitude;
+                                        double longitude1 = pickUpLatLng.longitude;
+                                        double latitude2 = dropOffLatLng.latitude;
+                                        double longitude2 = dropOffLatLng.longitude;
+
+                                        double midpointLat = (latitude1 + latitude2) / 2.0;
+                                        double midpointLng = (longitude1 + longitude2) / 2.0;
+
+                                        LatLng midpointLatLng = new LatLng(midpointLat, midpointLng);
+
+                                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(midpointLatLng, 14));                                    }
+                                    @Override
+                                    public void onLatLngFetchFailed() {
+                                        Toast.makeText(getContext(),"fetch failed",Toast.LENGTH_SHORT);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onLatLngFetchFailed() {
+                            Toast.makeText(getContext(),"fetch failed",Toast.LENGTH_SHORT);
+                            }
+                        });
+
+                    }
+                    return false;
                 }
             });
 
@@ -404,7 +566,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     newMarker.setSnippet("Departure time: "+document.getLong("time.hour") +":"+document.getLong("time.minute")+" "+document.getLong("time.day")+"/"
                             +document.getLong("time.month"));
                     newMarker.setTag(document);
-
                 }
             } else {
                 Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -412,8 +573,31 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
+
     private float getRandomRotationDegree() {
         return new Random().nextFloat() * 360;
     }
+    public interface OnLatLngFetchedListener {
+        void onLatLngFetched(LatLng latLng);
+        void onLatLngFetchFailed();
+    }
+    private void getLatLngFromPlaceId(String placeId, OnLatLngFetchedListener listener) {
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
 
+        FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields).build();
+        placesClient.fetchPlace(request)
+                .addOnSuccessListener((response) -> {
+                    Place place = response.getPlace();
+                    LatLng latLng = place.getLatLng();
+                    if (latLng != null) {
+                        listener.onLatLngFetched(latLng);
+                    } else {
+                        listener.onLatLngFetchFailed();
+                    }
+                })
+                .addOnFailureListener((exception) -> {
+                    exception.printStackTrace();
+                    listener.onLatLngFetchFailed();
+                });
+    }
 }

@@ -62,7 +62,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")
 
 
-    implementation ("com.google.android.gms:play-services-maps:17.0.1")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("com.google.android.libraries.places:places:3.3.0")
     constraints {
@@ -75,5 +75,9 @@ dependencies {
     }
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("org.slf4j:slf4j-nop:1.7.25")
+    implementation ("com.google.maps:google-maps-services:0.2.5")
+
+
 
 }

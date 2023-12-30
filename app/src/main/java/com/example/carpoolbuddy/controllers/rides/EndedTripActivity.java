@@ -27,20 +27,25 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carpoolbuddy.R;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class MyTripProfileActivity extends AppCompatActivity {
+public class EndedTripActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private StorageReference storageReference;
 
@@ -62,12 +67,13 @@ public class MyTripProfileActivity extends AppCompatActivity {
     private int c;
 
     private String vehicleId;
+    private Vehicle vehicle;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_trip_profile);
+        setContentView(R.layout.activity_ended_trip_profile);
 
         // Retrieve the vehicleId from the intent extras
         Intent intent = getIntent();
@@ -98,7 +104,8 @@ public class MyTripProfileActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    Vehicle vehicle = document.toObject(Vehicle.class);
+                     vehicle = document.toObject(Vehicle.class);
+
                     if (vehicle != null) {
                         nameField.setText(vehicle.getOwner().getName());
                         phoneField.setText(vehicle.getOwner().getPhone());
@@ -110,11 +117,6 @@ public class MyTripProfileActivity extends AppCompatActivity {
                         c = vehicle.getCapacity();
                         priceField.setText(Double.toString(vehicle.getPrice()) + " HKD");
                         typeField.setText(vehicle.getVehicleType());
-//                        if(vehicle.isEnd()){
-//                            button.setText("Delete Trip");
-//                            instructionField.setText("The ride owner has ended the ride. After you delete this trip, you'll not be able to see it.");
-//                        }
-                        addImage(vehicle);
 
                     }
                 }
@@ -124,38 +126,6 @@ public class MyTripProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "Load ride info failed", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    private void addImage(Vehicle vehicle){
-        // Load the image using the vehicle ID
-        ImageView imageView = findViewById(R.id.vehicle_image4);
-        String imageName = vehicle.getVehicleID()+".png";
-        System.out.println(imageName);
-        StorageReference imageRef = storageReference.child("vehicles")
-                .child(imageName);
-        imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(null);
-            Glide.with(this)
-                    .setDefaultRequestOptions(requestOptions)
-                    .load(uri)
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
-                    .into(imageView);
-        }).addOnFailureListener(e -> {
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable d = getResources().getDrawable(R.drawable.rectangle_grey);
-            imageView.setImageDrawable(d);
-            System.out.println(e+" error");
-        });
-
     }
 
     public void back(View w) {
@@ -169,90 +139,54 @@ public class MyTripProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void cancel(View w){
-        String collectionPath = "vehicles/cars/cars";
-        switch (type) {
-            case "Car":
-                collectionPath = "vehicles/cars/cars";
-                break;
-            case "Bike":
-                collectionPath = "vehicles/bikes/bikes";
-                break;
-            case "Helicopter":
-                collectionPath = "vehicles/helicopters/helicopters";
-                break;
-            case "Segway":
-                collectionPath = "vehicles/segways/segways";
-                break;
-        }
-        DocumentReference documentRef = firestore.collection(collectionPath).document(vehicleId);
-        documentRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        int currentCapacity = document.getLong("capacity").intValue();
-                        int newCapacity = currentCapacity+c;
-
-                        documentRef.update("open", true, "capacity", newCapacity)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> subTask) {
-                                        if (subTask.isSuccessful()) {
-                                            delReservation();
-                                            Toast.makeText(MyTripProfileActivity.this, "Cancel reservation successful. Please make sure to let the vehicle owner know!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(MyTripProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    } else {
-                        Toast.makeText(MyTripProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(MyTripProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void delReservation() {
+    public void deleteAndRate(View view) {
         // Replace "userid" and "vehicleid" with the actual user ID and vehicle ID
         String userId = mAuth.getCurrentUser().getUid();
+        String ownerId = vehicle.getOwner().getUid();
+        System.out.println("ownerId");
 
         String reservationPath = "reservations/" + userId + "/" + userId + "/" + vehicleId;
+
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+        float rating = ratingBar.getRating();
+        System.out.println();
+
         DocumentReference documentRef = firestore.document(reservationPath);
         documentRef.delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("Firestore", "Reservation document deleted successfully");
+
+                        DocumentReference userRef = firestore.collection("users").document(ownerId);
+
+                        userRef.update("ratingNum", FieldValue.increment(1))
+                                .addOnSuccessListener(bVoid -> {
+                                    userRef.update("ratingTotal", FieldValue.increment(rating))
+                                            .addOnSuccessListener(cVoid -> {
+                                                userRef.get().addOnSuccessListener(documentSnapshot -> {
+                                                    int ratingNum = documentSnapshot.getLong("ratingNum").intValue();
+                                                    float ratingTotal = documentSnapshot.getLong("ratingTotal").floatValue();
+                                                    Map<String, Object> data = new HashMap<>();
+                                                    System.out.println(ratingTotal / ratingNum);
+
+                                                    userRef.update("rating", ratingTotal / ratingNum);
+                                                    Toast.makeText(EndedTripActivity.this, "Trip record deleted successfully. Experience rated successfully.", Toast.LENGTH_SHORT).show();
+                                                    back(null);
+                                                });
+                                            });
+                                });
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("Firestore", "Error deleting reservation document", e);
+                        Log.e("Firestore", "Something went wrong, please refresh and try again.", e);
                     }
                 });
 
 
-        String recordPath = "records/" + vehicleId + "/" + vehicleId + "/" + userId;
-        DocumentReference rdocumentRef = firestore.document(recordPath);
-        rdocumentRef.delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Firestore", "Reservation document deleted successfully");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firestore", "Error deleting reservation document", e);
-                    }
-                });
     }
+
 
 }

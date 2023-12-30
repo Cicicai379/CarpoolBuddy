@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.carpoolbuddy.R;
 import com.example.carpoolbuddy.controllers.rides.AddVehicleActivity;
 import com.example.carpoolbuddy.controllers.explore.VehicleProfileActivity;
+import com.example.carpoolbuddy.controllers.rides.EndedTripActivity;
 import com.example.carpoolbuddy.controllers.rides.MyTripProfileActivity;
 import com.example.carpoolbuddy.controllers.rides.MyVehicleProfileActivity;
 import com.example.carpoolbuddy.models.User;
@@ -34,6 +35,7 @@ import com.example.carpoolbuddy.models.Vehicle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -102,7 +104,7 @@ public class RidesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rides, container, false);
-         firestore = FirebaseFirestore.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         curuser = mAuth.getCurrentUser();
@@ -225,9 +227,34 @@ public class RidesFragment extends Fragment {
                 List<Vehicle> vehicles = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Vehicle vehicle = document.toObject(Vehicle.class);
-                    if (!vehicle.isEnd()) {
-                        vehicles.add(vehicle);
+
+                    if(vehicle.isEndByUser()) {
+                        System.out.println("is ended by user");
+                        continue;
                     }
+
+                    firestore.collection("vehicles")
+                            .document(vehicle.getVehicleType().toLowerCase()+"s")
+                            .collection(vehicle.getVehicleType().toLowerCase()+"s")
+                            .document(vehicle.getVehicleID())
+                            .get()
+                            .addOnCompleteListener(task2 -> {
+                                if (task2.isSuccessful()) {
+                                    System.out.println("retriving end info");
+                                    DocumentSnapshot document2 = task2.getResult();
+                                    System.out.println(vehicle.getVehicleID()+" "+vehicle.getVehicleType()+ "  " +Boolean.TRUE.equals(document2.getBoolean("end")));
+
+                                    if (document2 != null && document2.exists()) {
+                                        boolean isEnded = Boolean.TRUE.equals(document2.getBoolean("end"));
+                                        if (isEnded) {
+                                            vehicle.setEnd(true);
+                                            System.out.println("is ended");
+                                        }
+                                    }
+                                }
+                            });
+                    vehicles.add(vehicle);
+
                 }
                 renderLayoutRows(view, vehicles, true);
             } else {
@@ -241,14 +268,23 @@ public class RidesFragment extends Fragment {
         LinearLayout linearLayout = view.findViewById(R.id.linear);
 
         for (Vehicle vehicle : vehicles) {
-            View rowView = inflater.inflate(R.layout.vehicle_row, null);
+            View rowView = inflater.inflate(R.layout.vehicle_row_user, null);
             TextView ownerTextView = rowView.findViewById(R.id.owner);
             TextView locationTextView = rowView.findViewById(R.id.location);
             TextView infoTextView = rowView.findViewById(R.id.info);
+            TextView endTextView = rowView.findViewById(R.id.endByOwner);
+            System.out.println(vehicle.isEnd());
 
+            if(vehicle.isEnd()) {
+                System.out.println("set text to ended");
+                endTextView.setText("Ended by Owner!    ");
+            }
 
             locationTextView.setText(vehicle.getPickUpLocation().getAddress() + " to "+vehicle.getDropOffLocation().getAddress());
-            ownerTextView.setText(vehicle.getOwner().getName() + ": " + vehicle.getOwner().getRating());
+            firestore.collection("users").document(vehicle.getOwner().getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                float rating = documentSnapshot.getLong("rating").floatValue();
+                ownerTextView.setText(vehicle.getOwner().getName() + " | rating: " + rating);
+            });
             infoTextView.setText(vehicle.getPrice() + " HKD | " + vehicle.getTime().toString() + " | " + vehicle.getCapacity() + " seats");
 
             // Load the image using the vehicle ID
@@ -289,6 +325,20 @@ public class RidesFragment extends Fragment {
 
 
             // Set onClickListener to the row view
+            if(vehicle.isEnd()){
+                rowView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Start another activity and pass the vehicleId as extra
+                        Intent intent = new Intent(view.getContext(), MyVehicleProfileActivity.class);
+                        if(trip) intent = new Intent(view.getContext(), EndedTripActivity.class);
+                        intent.putExtra("vehicleId", vehicle.getVehicleID());
+                        intent.putExtra("type", vehicle.getVehicleType());
+
+                        startActivity(intent);
+                    }
+                });
+            }else{
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -296,15 +346,18 @@ public class RidesFragment extends Fragment {
                      Intent intent = new Intent(view.getContext(), MyVehicleProfileActivity.class);
                     if(trip) intent = new Intent(view.getContext(), MyTripProfileActivity.class);
                     intent.putExtra("vehicleId", vehicle.getVehicleID());
-                    intent.putExtra("type", "Car");
+                    intent.putExtra("type", vehicle.getVehicleType());
 
                     startActivity(intent);
                 }
             });
+            }
 
             linearLayout.addView(rowView);
         }
     }
+
+
 
 
 

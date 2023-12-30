@@ -12,8 +12,27 @@ public class User {
     private double priceMultiplier;
     public ArrayList<Vehicle> ownedVehicles= new ArrayList<Vehicle>();;
     private double rating = 5.00;
+    private double ratingNum = 0;
+    private double ratingTotal = 0;
+
     public User(){
 
+    }
+
+    public double getRatingNum() {
+        return ratingNum;
+    }
+
+    public double getRatingTotal() {
+        return ratingTotal;
+    }
+
+    public void setRatingTotal(double ratingTotal) {
+        this.ratingTotal = ratingTotal;
+    }
+
+    public void setRatingNum(double ratingNum) {
+        this.ratingNum = ratingNum;
     }
 
     public double getRating() {

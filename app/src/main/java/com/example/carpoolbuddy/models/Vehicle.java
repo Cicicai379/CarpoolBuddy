@@ -13,6 +13,8 @@ public class Vehicle implements Serializable {
     private ArrayList<String> ridersUIDs;
     private boolean open=true;
     private boolean end=false;
+    private boolean endByUser=false;
+
 
     private String vehicleType;
     private double price;
@@ -34,6 +36,13 @@ public class Vehicle implements Serializable {
         this.pickUpLocation = p;
         this.dropOffLocation = d;
         this.time = time;
+    }
+    public boolean isEndByUser() {
+        return endByUser;
+    }
+
+    public void setEndByUser(boolean endByUser) {
+        this.endByUser = endByUser;
     }
 
     public CTime getTime() {

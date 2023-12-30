@@ -129,6 +129,7 @@ public class ProfileFragment extends Fragment {
             TextView phoneTextView = view.findViewById(R.id.vehicle_phone);
             TextView ridesTextView = view.findViewById(R.id.rides_num);
             TextView tripsTextView = view.findViewById(R.id.trips_num);
+            TextView ratingTextView = view.findViewById(R.id.rating);
 
             ImageView profileImageView = view.findViewById(R.id.circleImageView);
 
@@ -146,6 +147,8 @@ public class ProfileFragment extends Fragment {
                         nameTextView.setText(user1.getName());
                         emailTextView.setText(user1.getEmail());
                         phoneTextView.setText(user1.getPhone());
+                        ratingTextView.setText(user1.getRating()+"");
+                        ridesTextView.setText(user1.getRatingNum()+"");
 
                         StorageReference profileImageRef = storageReference.child("profile_images")
                                 .child(userId + ".jpg");
@@ -199,29 +202,9 @@ public class ProfileFragment extends Fragment {
                     Toast.makeText(view.getContext(), "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
                 }
             });
-            CollectionReference carsCollectionRef = firestore.collection("vehicles").document("cars").collection("cars");
-            CollectionReference bikesCollectionRef = firestore.collection("vehicles").document("bikes").collection("bikes");
-            CollectionReference helicoptersCollectionRef = firestore.collection("vehicles").document("helicopters").collection("helicopters");
-            CollectionReference segwaysCollectionRef = firestore.collection("vehicles").document("segways").collection("segways");
 
-            List<Task<QuerySnapshot>> tasks = new ArrayList<>();
-            tasks.add(carsCollectionRef.get());
-            tasks.add(bikesCollectionRef.get());
-            tasks.add(helicoptersCollectionRef.get());
-            tasks.add(segwaysCollectionRef.get());
 
-            Task<List<QuerySnapshot>> combinedTask = Tasks.whenAllSuccess(tasks);
-            combinedTask.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    int totalReservations = 0;
-                    for (QuerySnapshot querySnapshot : task.getResult()) {
-                        totalReservations += querySnapshot.size();
-                    }
-                    ridesTextView.setText(totalReservations+"");
-                } else {
-                    Toast.makeText(view.getContext(), "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
-                }
-            });
+
 
 
         }

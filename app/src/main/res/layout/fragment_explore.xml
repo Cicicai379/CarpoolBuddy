@@ -80,7 +80,7 @@
                 android:layout_width="341dp"
                 android:layout_height="41dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="88dp"
+                android:layout_marginTop="92dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Share the Ride, Multiply the Joy!"
                 android:textSize="20sp"

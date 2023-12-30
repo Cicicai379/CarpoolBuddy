@@ -83,7 +83,10 @@ public class HelicoptersActivity extends AppCompatActivity {
 
 
             locationTextView.setText(vehicle.getPickUpLocation().getAddress() + " to "+vehicle.getDropOffLocation().getAddress());
-            ownerTextView.setText(vehicle.getOwner().getName() + ": " + vehicle.getOwner().getRating());
+            firestore.collection("users").document(vehicle.getOwner().getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                float rating = documentSnapshot.getLong("rating").floatValue();
+                ownerTextView.setText(vehicle.getOwner().getName() + " | rating: " + rating);
+            });
             infoTextView.setText(vehicle.getPrice() + " HKD | " + vehicle.getTime().toString() + " | " + vehicle.getCapacity() + " seats");
 
             // Load the image using the vehicle ID
