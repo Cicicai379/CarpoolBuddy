@@ -1,4 +1,3 @@
-Scenario
 The CIS community has been making a few strides towards cutting down on carbon emissions. DITO created a whole report where they calculated that the CIS community emits an estimated 214 tons of CO2 and approximately 6.4 million kilometers annually from commuting. One of their possible solutions to reducing this number is to have less students travel to school by personal cars. About 32% of our commuting is done by driving single-family cars to CIS. Our main problems currently are:
 The community has no way of knowing who is driving at what time.
 There is no system to share and “book” a ride.
@@ -6,7 +5,6 @@ There is no way to encourage the use of electric cars other than through emails.
 There is no reward system to encourage students and parents to carpool to school.
 There is no way to book alternative transportation, like bicycles, helicopters, or segways. 
 
-Justification
 To combat this problem, the IB CS department is looking to create a good solution that will help students connect to others and find ways to carpool together. The benefits are:
 
 Less CO2 emissions and fewer fossil fuels generated from non-electric vehicles.
