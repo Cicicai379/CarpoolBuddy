@@ -7,14 +7,14 @@ There is no way to book alternative transportation, like bicycles, helicopters, 
 
 To combat this problem, the IB CS department is looking to create a good solution that will help students connect to others and find ways to carpool together. The benefits are:
 
-Less CO2 emissions and fewer fossil fuels generated from non-electric vehicles.
+Fewer CO2 emissions and fewer fossil fuels are generated from non-electric vehicles.
 Less traffic on Braemar Hill, which means less idling of vehicles and shorter traffic/commute time to and from CIS.
 Encourage the use of electric cars through prioritization. 
-Allow for alternative vehicles to be used, like bicycles (reduce emissions), helicopters (reduce traffic) and segways (reduce traffic and emissions). 
+Allow for alternative vehicles to be used, like bicycles (reduce emissions), helicopters (reduce traffic), and segways (reduce traffic and emissions). 
 
-We are proposing the addition of Carpool Buddy. This app looks to connect, and encourage, students to carpool together. 
+We are proposing the addition of Carpool Buddy. This app looks to connect and encourage, students to carpool together. 
 
-For our tech stack we will be using Android Studio, Firebase Firestore, and Java. We found that creating our own server can be quite troublesome and unstable. Through Firestore we will be able to store data permanently, create users, allow community members to sign up with their school emails, and never worry about server downtime. Firestore is also free, which is a great feature for our start up, since we ain’t got no money. Other options like MongoDB, Firebase Realtime, and AWS exist. MongoDB has suffered from intermittent outages in support for Android, even though their database storage system is great. AWS has a steep learning curve and doesn’t offer easy support for Android. It also doesn’t offer single sign-on with google accounts, which our community uses extensively. Firebase Realtime suffers from poor reviews of their NoSQL database design. 
+For our tech stack, we will be using Android Studio, Firebase Firestore, and Java. We found that creating our server can be quite troublesome and unstable. Through Firestore we will be able to store data permanently, create users, allow community members to sign up with their school emails, and never worry about server downtime. Firestore is also free, which is a great feature for our start-up, since we ain’t got no money. Other options like MongoDB, Firebase Realtime, and AWS exist. MongoDB has suffered from intermittent outages in support for Android, even though their database storage system is great. AWS has a steep learning curve and doesn’t offer easy support for Android. It also doesn’t offer single sign-on with google accounts, which our community uses extensively. Firebase Realtime suffers from poor reviews of its NoSQL database design. 
 
 Author:
-The app is built by C.C.
+The app is built by C.C. Feel free to reach out if you have any questions or wish to contribute to this project.
